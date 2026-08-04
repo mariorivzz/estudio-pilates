@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+/* ── Variables del tema Calma Studio ─────────────────────── */
+:root {
+  --primary: #6b4a30;
+  --primary-dark: #4f3722;
+  --primary-light: #cbb59a;
+  --primary-bg: #f2e6d3;
+  --secondary: #241a12;
+  --accent: #a97449;
+  --accent-light: #f2ded0;
+  --highlight: #c9a24a;
+  --highlight-bg: #f8f0dd;
+  --background: #f7f0e3;
+  --foreground: #241a12;
+  --card-bg: #ffffff;
+  --border: #e6d9c4;
+  --muted: #7a6a58;
+}
+
+/* ── Tailwind theme inline ───────────────────────────────── */
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-primary-bg: var(--primary-bg);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-highlight: var(--highlight);
+  --color-highlight-bg: var(--highlight-bg);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card-bg: var(--card-bg);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-playfair);
+}
+
+/* ── Base ────────────────────────────────────────────────── */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Animaciones (sutiles — sin bounce) ─────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up  { animation: fadeInUp  0.55s ease-out forwards; }
+.animate-fade-in     { animation: fadeIn    0.45s ease-out forwards; }
+.animate-slide-left  { animation: slideInLeft 0.55s ease-out forwards; }
+
+.delay-100 { animation-delay: 0.10s; }
+.delay-200 { animation-delay: 0.20s; }
+.delay-300 { animation-delay: 0.30s; }
+.delay-400 { animation-delay: 0.40s; }
+.delay-500 { animation-delay: 0.50s; }
+
+/* ── Componentes reutilizables ──────────────────────────── */
+
+/* Divisor de sección */
+.section-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 9999px;
+  margin: 0 auto;
+}
+
+/* Divisor alineado a la izquierda */
+.section-divider-left {
+  width: 48px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 9999px;
+}
+
+/* Card base — sombra sutil (no IA) */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 1px 4px rgba(38, 37, 33, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  box-shadow: 0 3px 10px rgba(38, 37, 33, 0.09);
+  transform: translateY(-2px);
+}
+
+/* Overlay para hero con foto */
+.hero-overlay {
+  background: rgba(30, 32, 27, 0.82);
+}
+
+/* ── Widget flotante de WhatsApp ────────────────────────── */
+.whatsapp-fab {
+  box-shadow: 0 2px 8px rgba(38, 37, 33, 0.08);
+}
+
+.whatsapp-tooltip {
+  box-shadow: 0 2px 8px rgba(38, 37, 33, 0.08);
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.35; }
+  70% { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

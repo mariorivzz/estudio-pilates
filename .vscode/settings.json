@@ -1,0 +1,33 @@
+{
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.linkedEditing": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.next": true
+  },
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true
+  },
+
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.suggest.autoImports": true,
+
+  "tailwindCSS.experimental.classRegex": [
+    ["className\\s*=\\s*[\"']([^\"']*)[\"']", "([\\w-/:]+)"]
+  ],
+
+  "emmet.includeLanguages": {
+    "typescriptreact": "html"
+  }
+}
