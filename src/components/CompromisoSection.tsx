@@ -1,3 +1,4 @@
+import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
 import { buildWhatsAppUrl } from '@/lib/utils';
 import { TbApple, TbBrandWhatsapp, TbCheck, TbSparkles, TbUsers } from 'react-icons/tb';
@@ -38,7 +39,7 @@ export default function CompromisoSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           {/* Icono y encabezado */}
-          <div className="flex items-start gap-5 flex-1">
+          <ScrollReveal className="flex items-start gap-5 flex-1" animation="slide-left">
             <div className="w-14 h-14 rounded-2xl bg-highlight/15 flex items-center justify-center shrink-0">
               <TbSparkles className="text-highlight" size={28} />
             </div>
@@ -54,13 +55,17 @@ export default function CompromisoSection() {
                 asesoramiento nutricional para cuidar tu cuerpo y tu mente.
               </p>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Separador visual */}
           <div className="hidden lg:block w-px h-24 bg-white/10" />
 
           {/* Síguenos en Instagram */}
-          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center gap-5">
+          <ScrollReveal
+            className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center gap-5"
+            animation="fade-in-up"
+            delay={200}
+          >
             <div className="text-center lg:text-left">
               <p className="text-white/50 text-xs uppercase tracking-widest mb-1">
                 Sigue nuestro proceso
@@ -84,25 +89,26 @@ export default function CompromisoSection() {
               <TbBrandWhatsapp size={20} />
               Escríbenos ahora
             </a>
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* Puntos clave */}
         <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-white/10 pt-8">
-          {puntos.map(({ icon: Icon, titulo, descripcion }) => (
-            <div
+          {puntos.map(({ icon: Icon, titulo, descripcion }, index) => (
+            <ScrollReveal
               key={titulo}
               className="bg-white/6 border border-white/10 rounded-xl p-5"
+              delay={((index + 1) * 100) as 100 | 200 | 300}
             >
               <Icon className="text-primary-light mb-2" size={20} />
               <h3 className="text-white font-semibold text-sm mb-1.5">{titulo}</h3>
               <p className="text-white/60 text-sm leading-relaxed">{descripcion}</p>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
 
         {/* Chips de información */}
-        <div className="mt-8 flex flex-wrap gap-3">
+        <ScrollReveal className="mt-8 flex flex-wrap gap-3" animation="fade-in" delay={300}>
           {chips.map((item) => (
             <div
               key={item}
@@ -112,7 +118,7 @@ export default function CompromisoSection() {
               <span>{item}</span>
             </div>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

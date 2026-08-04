@@ -1,3 +1,4 @@
+import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
 import { buildWhatsAppUrl } from '@/lib/utils';
 import { TbBrandInstagram, TbBrandWhatsapp, TbClock, TbMail, TbMapPin, TbPhone, TbSparkles } from 'react-icons/tb';
@@ -12,7 +13,7 @@ export default function ContactoSection() {
     <section id="contacto" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-14">
+        <ScrollReveal className="mb-14">
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">
             Dónde estamos
           </span>
@@ -23,11 +24,14 @@ export default function ContactoSection() {
           <p className="text-muted text-lg max-w-xl leading-relaxed">
             Abrimos próximamente en {siteConfig.address}, {siteConfig.city}.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Mapa (placeholder) */}
-          <div className="lg:col-span-3 rounded-2xl overflow-hidden border border-border h-80 lg:h-auto bg-primary-bg flex items-center justify-center min-h-64">
+          <ScrollReveal
+            className="lg:col-span-3 rounded-2xl overflow-hidden border border-border h-80 lg:h-auto bg-primary-bg flex items-center justify-center min-h-64"
+            animation="slide-left"
+          >
             <div className="text-center px-8">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <TbMapPin className="text-primary" size={32} />
@@ -52,10 +56,14 @@ export default function ContactoSection() {
                 </a>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Tarjetas de contacto */}
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+          <ScrollReveal
+            className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4"
+            animation="fade-in-up"
+            delay={200}
+          >
             {/* Teléfono */}
             <a
               href={`tel:${siteConfig.phone}`}
@@ -133,7 +141,7 @@ export default function ContactoSection() {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

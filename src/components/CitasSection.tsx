@@ -1,5 +1,6 @@
 'use client';
 
+import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
 import { buildWhatsAppUrl, formatDateES, getTomorrowDate } from '@/lib/utils';
 import { useState } from 'react';
@@ -141,7 +142,7 @@ export default function CitasSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Info lateral */}
-          <div>
+          <ScrollReveal animation="slide-left">
             <span className="text-primary font-semibold text-sm uppercase tracking-wider">
               Reserva online
             </span>
@@ -197,10 +198,10 @@ export default function CitasSection() {
                 <p><span className="text-muted font-medium">Domingo</span>  {siteConfig.hours.domingo}</p>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Formulario */}
-          <div className="card p-8">
+          <ScrollReveal className="card p-8" animation="fade-in-up" delay={200}>
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
               {/* Nombre */}
               <div>
@@ -351,7 +352,7 @@ export default function CitasSection() {
                 Te contactaremos para confirmar disponibilidad. Tus datos no se comparten con terceros.
               </p>
             </form>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
