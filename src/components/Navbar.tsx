@@ -3,7 +3,7 @@
 import { siteConfig } from '@/lib/config';
 import Link from 'next/link';
 import { useState } from 'react';
-import { TbBrandInstagram, TbMenu2, TbSparkles, TbX, TbYoga } from 'react-icons/tb';
+import { TbBrandInstagram, TbMenu2, TbX, TbYoga } from 'react-icons/tb';
 
 const navLinks = [
   { href: '#inicio',    label: 'Inicio' },
@@ -17,22 +17,6 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Barra de "Próximamente" (top strip) */}
-      <div className="bg-primary text-white text-xs font-medium py-1.5">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3">
-          <TbSparkles size={13} />
-          <span>{siteConfig.highlights.badge} — Síguenos: </span>
-          <a
-            href={siteConfig.instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold hover:underline tracking-wide"
-          >
-            {siteConfig.instagramHandle}
-          </a>
-        </div>
-      </div>
-
       {/* Navbar principal */}
       <nav className="bg-white/96 backdrop-blur-md shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

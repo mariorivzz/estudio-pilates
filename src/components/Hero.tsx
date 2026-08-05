@@ -12,7 +12,7 @@ export default function Hero() {
     <section
       id="inicio"
       className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ paddingTop: '96px' }} /* altura navbar + barra de "próximamente" */
+      style={{ paddingTop: '72px' }} /* altura navbar (h-18) */
     >
       {/* Fondo sólido oscuro - paleta del sector (sin gradientes IA) */}
       <div className="absolute inset-0 bg-secondary" />
