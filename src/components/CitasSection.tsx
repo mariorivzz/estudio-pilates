@@ -1,8 +1,10 @@
 'use client';
 
+import BookingEmbed from '@/components/BookingEmbed';
 import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
 import { buildWhatsAppUrl, formatDateES, getTomorrowDate } from '@/lib/utils';
+import Link from 'next/link';
 import { useState } from 'react';
 import {
     TbArrowRight,
@@ -24,7 +26,10 @@ interface FormData {
   fecha: string;
   horario: string;
   notas: string;
+  consentimiento: boolean;
 }
+
+type FormErrors = Partial<Record<keyof FormData, string>>;
 
 const tiposClase = [
   'Pilates Reformer',
@@ -53,20 +58,26 @@ const INITIAL_FORM: FormData = {
   fecha: '',
   horario: '',
   notas: '',
+  consentimiento: false,
 };
+
+/** Con proveedor de reservas dado de alta se muestra su calendario; si no, el formulario a WhatsApp. */
+const useBookingWidget = siteConfig.booking.enabled && siteConfig.booking.embedUrl.length > 0;
 
 export default function CitasSection() {
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const validate = (): boolean => {
-    const next: Partial<FormData> = {};
+    const next: FormErrors = {};
     if (formData.nombre.trim().length < 2) next.nombre = 'Introduce tu nombre';
     if (!/^[679]\d{8}$/.test(formData.telefono.replace(/\s/g, '')))
       next.telefono = 'Teléfono no válido (9 dígitos)';
     if (!formData.tipoClase) next.tipoClase = 'Elige el tipo de clase';
     if (!formData.fecha) next.fecha = 'Elige una fecha';
+    if (!formData.consentimiento)
+      next.consentimiento = 'Necesitamos tu consentimiento para poder contactarte';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -74,8 +85,10 @@ export default function CitasSection() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type } = e.target;
+    const nextValue =
+      type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
+    setFormData((prev) => ({ ...prev, [name]: nextValue }));
     if (errors[name as keyof FormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -151,17 +164,25 @@ export default function CitasSection() {
             </h2>
             <div className="section-divider-left mb-6" />
             <p className="text-muted text-lg leading-relaxed mb-10">
-              Rellena el formulario y te confirmamos la plaza por WhatsApp o teléfono en el mismo día.
+              {useBookingWidget
+                ? 'Elige el día y la hora que mejor te vengan y reserva tu plaza al instante.'
+                : 'Rellena el formulario y te confirmamos la plaza por WhatsApp o teléfono en el mismo día.'}
             </p>
 
             {/* Puntos clave */}
             <div className="space-y-5">
               {[
-                {
-                  icon: TbCalendar,
-                  title: 'Confirmación rápida',
-                  desc: 'Te contactamos el mismo día para confirmar tu plaza.',
-                },
+                useBookingWidget
+                  ? {
+                      icon: TbCalendar,
+                      title: 'Reserva inmediata',
+                      desc: 'Consulta las plazas libres y confirma en el momento.',
+                    }
+                  : {
+                      icon: TbCalendar,
+                      title: 'Confirmación rápida',
+                      desc: 'Te contactamos el mismo día para confirmar tu plaza.',
+                    },
                 {
                   icon: TbYoga,
                   title: 'Pilates, Barre o Nutrición',
@@ -200,7 +221,12 @@ export default function CitasSection() {
             </div>
           </ScrollReveal>
 
-          {/* Formulario */}
+          {/* Calendario del proveedor o, mientras no lo haya, formulario a WhatsApp */}
+          {useBookingWidget ? (
+            <ScrollReveal animation="fade-in-up" delay={200}>
+              <BookingEmbed />
+            </ScrollReveal>
+          ) : (
           <ScrollReveal className="card p-8" animation="fade-in-up" delay={200}>
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
               {/* Nombre */}
@@ -333,11 +359,45 @@ export default function CitasSection() {
                     rows={3}
                     value={formData.notas}
                     onChange={handleChange}
-                    placeholder="Lesiones, molestias, experiencia previa…"
+                    placeholder="Preferencias de horario, dudas sobre las clases…"
                     maxLength={500}
                     className="w-full pl-10 pr-4 py-3 text-sm bg-background border border-border rounded-xl outline-none focus:border-primary transition-colors resize-none"
                   />
                 </div>
+                {/* Evita recoger datos de salud (art. 9 RGPD) por un canal no cifrado
+                    extremo a extremo bajo nuestro control — se preguntan en el estudio. */}
+                <p className="text-muted text-xs mt-1.5">
+                  No incluyas datos de salud (lesiones, embarazo, patologías). Los valoraremos
+                  contigo en el estudio antes de tu primera clase.
+                </p>
+              </div>
+
+              {/* Consentimiento explícito (art. 6.1.a RGPD) — sin marcar por defecto */}
+              <div>
+                <label htmlFor="consentimiento" className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    id="consentimiento"
+                    name="consentimiento"
+                    type="checkbox"
+                    checked={formData.consentimiento}
+                    onChange={handleChange}
+                    className="mt-0.5 w-4 h-4 shrink-0 accent-primary"
+                  />
+                  <span className="text-xs text-muted leading-relaxed">
+                    He leído y acepto la{' '}
+                    <Link
+                      href="/privacidad"
+                      className="text-primary underline hover:text-primary-dark"
+                    >
+                      política de privacidad
+                    </Link>{' '}
+                    y autorizo a {siteConfig.businessName} a usar mis datos para gestionar esta
+                    solicitud de reserva. <span className="text-primary">*</span>
+                  </span>
+                </label>
+                {errors.consentimiento && (
+                  <p className="text-primary text-xs mt-1">{errors.consentimiento}</p>
+                )}
               </div>
 
               <button
@@ -349,10 +409,12 @@ export default function CitasSection() {
               </button>
 
               <p className="text-center text-xs text-muted">
-                Te contactaremos para confirmar disponibilidad. Tus datos no se comparten con terceros.
+                Al enviar se abre WhatsApp con tu solicitud redactada: los datos viajan por
+                WhatsApp (Meta) y no se envían a ningún otro servidor.
               </p>
             </form>
           </ScrollReveal>
+          )}
         </div>
       </div>
     </section>

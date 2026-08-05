@@ -1,7 +1,18 @@
 import type { NextConfig } from "next";
 import path from "path";
+import { siteConfig } from "./src/lib/config";
 
 const isDev = process.env.NODE_ENV === "development";
+
+// Orígenes permitidos en iframes: Google Maps (sección de contacto) y, cuando se
+// da de alta un proveedor de reservas, el suyo. Sin esto el navegador bloquea el
+// widget en silencio: la sección aparece vacía y no se registra error en la página.
+// Ver docs/RESERVAS.md.
+const bookingOrigin = siteConfig.booking.embedUrl
+  ? new URL(siteConfig.booking.embedUrl).origin
+  : "";
+
+const frameSrc = ["https://www.google.com", bookingOrigin].filter(Boolean).join(" ");
 
 // CSP without nonces so pages stay statically generated (per Next.js docs:
 // nonces would force dynamic rendering on every page). 'unsafe-inline' on
@@ -16,7 +27,7 @@ const cspHeader = `
   object-src 'none';
   base-uri 'self';
   form-action 'self';
-  frame-src https://www.google.com;
+  frame-src ${frameSrc};
   frame-ancestors 'self';
   upgrade-insecure-requests;
 `

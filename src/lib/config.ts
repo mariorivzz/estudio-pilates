@@ -63,6 +63,22 @@ export interface SiteConfig {
     label: string;
     message: string;
   };
+  legal: {
+    razonSocial: string;
+    nif: string;
+    domicilioFiscal: string;
+    emailPrivacidad: string;
+  };
+  booking: {
+    /** `false` mantiene el formulario que deriva a WhatsApp; `true` muestra el widget del proveedor. */
+    enabled: boolean;
+    /** Nombre del proveedor, mostrado en el aviso de cesión de datos del formulario. */
+    providerName: string;
+    /** URL del iframe de reservas. Su origen debe añadirse a `frame-src` en next.config.ts. */
+    embedUrl: string;
+    /** Altura del iframe en píxeles. */
+    embedHeight: number;
+  };
 }
 
 export const siteConfig: SiteConfig = {
@@ -133,5 +149,21 @@ export const siteConfig: SiteConfig = {
     label: 'Habla con nuestro asistente',
     message:
       'Hola 👋 Me gustaría hablar con el asistente de Calma Studio para consultar clases de Pilates, Barre y nutrición.',
+  },
+  // ⭐ EDITAR (obligatorio antes de publicar): la LSSI-CE exige identificar al
+  // titular del sitio con datos reales. No son públicos, así que van vacíos a
+  // propósito — el aviso legal muestra un recordatorio mientras no se rellenen.
+  legal: {
+    razonSocial: '', // EDITAR: nombre fiscal o razón social del titular
+    nif: '', // EDITAR: NIF / CIF
+    domicilioFiscal: '', // EDITAR: domicilio fiscal (puede diferir del estudio)
+    emailPrivacidad: '', // EDITAR: email para ejercer derechos RGPD (si se deja vacío se usa el email general)
+  },
+  // Sistema de reservas — ver docs/RESERVAS.md para dar de alta el proveedor.
+  booking: {
+    enabled: false,
+    providerName: 'Sammy',
+    embedUrl: '', // EDITAR: URL del widget que facilite el proveedor
+    embedHeight: 900,
   },
 };

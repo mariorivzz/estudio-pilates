@@ -1,6 +1,7 @@
 import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
 import { buildWhatsAppUrl } from '@/lib/utils';
+import Link from 'next/link';
 import {
     TbBrandInstagram,
     TbBrandWhatsapp,
@@ -15,6 +16,11 @@ const quickLinks = [
   { href: '#servicios', label: 'Servicios' },
   { href: '#citas',     label: 'Reservar' },
   { href: '#contacto',  label: 'Contacto' },
+];
+
+const legalLinks = [
+  { href: '/aviso-legal', label: 'Aviso legal' },
+  { href: '/privacidad',  label: 'Política de privacidad' },
 ];
 
 const serviciosList = [
@@ -157,9 +163,17 @@ export default function Footer() {
           <p className="text-white/30 text-sm">
             © {year} {siteConfig.businessName}. Todos los derechos reservados.
           </p>
-          <p className="text-white/20 text-xs">
-            {siteConfig.address} · {siteConfig.postalCode ? `${siteConfig.postalCode} ` : ''}{siteConfig.city}
-          </p>
+          <div className="flex items-center gap-5">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-white/40 hover:text-primary-light text-xs transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

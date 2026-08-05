@@ -52,7 +52,7 @@ export default function Hero() {
       */}
 
       {/* Contenido */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20 w-full">
         <div className="max-w-3xl">
           {/* Confianza */}
           <div className="animate-fade-in delay-100 flex items-center gap-2 mb-6">
