@@ -1,7 +1,7 @@
 import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
 import { buildWhatsAppUrl } from '@/lib/utils';
-import { TbBrandInstagram, TbBrandWhatsapp, TbClock, TbMail, TbMapPin, TbPhone, TbSparkles } from 'react-icons/tb';
+import { TbBrandInstagram, TbBrandWhatsapp, TbClock, TbMail, TbPhone, TbSparkles } from 'react-icons/tb';
 
 export default function ContactoSection() {
   const whatsappUrl = buildWhatsAppUrl(
@@ -27,35 +27,26 @@ export default function ContactoSection() {
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          {/* Mapa (placeholder) */}
+          {/* Mapa */}
           <ScrollReveal
-            className="lg:col-span-3 rounded-2xl overflow-hidden border border-border h-80 lg:h-auto bg-primary-bg flex items-center justify-center min-h-64"
+            className="lg:col-span-3 rounded-2xl overflow-hidden border border-border h-80 lg:h-auto min-h-64 relative"
             animation="slide-left"
           >
-            <div className="text-center px-8">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TbMapPin className="text-primary" size={32} />
-              </div>
-              <p className="font-semibold text-secondary text-lg">{siteConfig.address}</p>
-              <p className="text-muted mb-2">{siteConfig.postalCode ? `${siteConfig.postalCode} ` : ''}{siteConfig.city}</p>
-              {siteConfig.comingSoon && (
-                <span className="inline-flex items-center gap-1.5 bg-highlight/15 text-highlight text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                  <TbSparkles size={12} />
-                  Próximamente
-                </span>
-              )}
-              <div>
-                <a
-                  href={siteConfig.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors"
-                >
-                  <TbMapPin size={15} />
-                  Abrir en Google Maps
-                </a>
-              </div>
-            </div>
+            <iframe
+              src={siteConfig.mapsEmbedUrl}
+              className="absolute inset-0 w-full h-full grayscale-[15%] contrast-[1.02]"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              title={`Mapa de ubicación de ${siteConfig.businessName}`}
+            />
+            {siteConfig.comingSoon && (
+              <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-highlight text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                <TbSparkles size={12} />
+                Próximamente
+              </span>
+            )}
           </ScrollReveal>
 
           {/* Tarjetas de contacto */}

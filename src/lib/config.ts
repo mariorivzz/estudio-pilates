@@ -22,6 +22,7 @@ export interface SiteConfig {
   city: string;
   postalCode: string;
   mapsUrl: string;
+  mapsEmbedUrl: string;
   instagramUrl: string;
   instagramHandle: string;
   comingSoon: boolean;
@@ -75,6 +76,8 @@ export const siteConfig: SiteConfig = {
   city: 'Salamanca',
   postalCode: '', // EDITAR: no confirmado — no inventar un código postal sin verificar
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Avda.+Federico+Anaya+71+Salamanca',
+  mapsEmbedUrl:
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.2960959455604!2d-5.655930923389798!3d40.97835127135473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3f2603a680678f%3A0x500e0771b04f2db!2sAv.%20de%20Federico%20Anaya%2C%2071%2C%2037005%20Salamanca!5e1!3m2!1ses!2ses!4v1785931047206!5m2!1ses!2ses',
   instagramUrl: 'https://www.instagram.com/calmastudio71',
   instagramHandle: '@calmastudio71',
   comingSoon: true,
