@@ -11,8 +11,10 @@ const jsonLd = {
   '@type': siteConfig.seo.schemaType,
   name: siteConfig.businessName,
   description: siteConfig.description,
+  url: siteConfig.seo.siteUrl,
   telephone: siteConfig.phone,
   email: siteConfig.email,
+  sameAs: [siteConfig.instagramUrl],
   address: {
     '@type': 'PostalAddress',
     streetAddress: siteConfig.address,

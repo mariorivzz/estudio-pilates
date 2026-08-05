@@ -19,15 +19,24 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.seo.siteUrl),
   title: siteConfig.seo.title,
   description: siteConfig.seo.description,
   keywords: siteConfig.seo.keywords,
   robots: { index: true, follow: true },
+  alternates: { canonical: "/" },
   openGraph: {
     title: siteConfig.seo.title,
     description: siteConfig.seo.description,
+    url: siteConfig.seo.siteUrl,
+    siteName: siteConfig.businessName,
     locale: "es_ES",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
   },
 };
 

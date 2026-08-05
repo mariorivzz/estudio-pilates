@@ -53,6 +53,7 @@ export interface SiteConfig {
     stats: Array<{ value: string; label: string }>;
   };
   seo: {
+    siteUrl: string;
     title: string;
     description: string;
     keywords: string[];
@@ -113,6 +114,7 @@ export const siteConfig: SiteConfig = {
     ],
   },
   seo: {
+    siteUrl: 'https://calmastudio.es', // EDITAR: sustituye por el dominio real (o la URL de Vercel) antes de publicar
     title: 'Calma Studio | Pilates, Barre & Nutrición en Salamanca',
     description:
       'Calma Studio, el primer centro de Barre de Salamanca. Clases de Pilates y Barre en grupos reducidos y asesoramiento en nutrición. Próximamente en Avda. Federico Anaya, 71.',
