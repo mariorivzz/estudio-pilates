@@ -1,6 +1,6 @@
 import { siteConfig } from '@/lib/config';
 // import Image from 'next/image';
-import { TbArrowRight, TbBrandInstagram, TbMusic, TbSparkles, TbYoga } from 'react-icons/tb';
+import { TbArrowRight, TbBrandInstagram, TbMusic, TbYoga } from 'react-icons/tb';
 
 // Foto de fondo (Unsplash, licencia libre, de https://unsplash.com/@roxanarxx) —
 // descomentar junto con el bloque <Image> de abajo para reactivarla.
@@ -54,12 +54,6 @@ export default function Hero() {
       {/* Contenido */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         <div className="max-w-3xl">
-          {/* Badge de "próximamente" */}
-          <div className="animate-fade-in inline-flex items-center gap-2 bg-highlight text-secondary px-4 py-1.5 rounded-full text-sm font-semibold mb-8">
-            <TbSparkles size={14} />
-            {siteConfig.hero.badge}
-          </div>
-
           {/* Confianza */}
           <div className="animate-fade-in delay-100 flex items-center gap-2 mb-6">
             <span className="text-white/60 text-sm">
