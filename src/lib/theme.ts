@@ -1,34 +1,45 @@
 // ─── Tema: Calma Studio ──────────────────────────────────────
-// Marrón café cálido + crudo/beige + dorado suave — inspirado en la
-// identidad real de @calmastudio71 (logo crema + tipografía marrón oscuro).
-// NO lavanda/spa genérico de IA, NO azul clínico, NO verde salvia genérico.
+// Amarillo mantequilla + marrón + azul + detalles en naranja — inspirado en
+// la identidad real de @calmastudio71, con fondos marrón/azul tomados de la
+// paleta de referencia aportada por el cliente.
+// NO lavanda/spa genérico de IA, NO verde salvia genérico.
+//
+// Paleta anterior (marrón café + crudo/beige + dorado suave), guardada aquí
+// como referencia por si hay que volver atrás — también recuperable en el
+// historial de git (commit 8b925fb y anteriores):
+//   primary: '#6b4a30', primaryDark: '#4f3722', primaryLight: '#cbb59a',
+//   primaryBg: '#f2e6d3', secondary: '#241a12', muted: '#7a6a58',
+//   accent: '#a97449', accentLight: '#f2ded0', highlight: '#c9a24a',
+//   highlightBg: '#f8f0dd', background: '#f7f0e3', cardBg: '#ffffff',
+//   border: '#e6d9c4', heroOverlay: 'rgba(24, 17, 11, 0.84)'
 
 export const theme = {
   // Colores principales
-  primary: '#6b4a30',       // Marrón café cálido
-  primaryDark: '#4f3722',   // Hover states
-  primaryLight: '#cbb59a',  // Fondos suaves / texto sobre oscuro
-  primaryBg: '#f2e6d3',     // Fondo muy sutil para secciones
+  primary: '#74342b',       // Marrón principal
+  primaryDark: '#4a231c',   // Hover states / cards oscuras
+  primaryLight: '#d9a67e',  // Texto/iconos claros sobre fondo oscuro
+  primaryBg: '#eed694',     // Fondo suave marrón-mantequilla para secciones
 
   // Texto
-  secondary: '#241a12',     // Marrón casi negro para cuerpo de texto
-  muted: '#7a6a58',         // Texto secundario
+  secondary: '#391212',     // Marrón oscuro — cuerpo de texto y fondos oscuros (Hero, Footer)
+  muted: '#6e4f36',         // Texto secundario
 
   // Colores de apoyo
-  accent: '#a97449',        // Caramelo/terracota — CTAs de reserva/WhatsApp
-  accentLight: '#f2ded0',   // Fondo caramelo muy sutil
+  accent: '#cc6a24',        // Naranja — detallitos, CTAs de reserva/WhatsApp
+  accentLight: '#f6dab8',   // Fondo naranja muy sutil
 
   // Insignias de "Próximamente" / confianza
-  highlight: '#c9a24a',     // Dorado suave
-  highlightBg: '#f8f0dd',
+  highlight: '#8fa4d1',       // Azul
+  highlightDark: '#2b3b64',   // Azul oscuro — fondo de sección (CompromisoSection)
+  highlightBg: '#e6ecf8',
 
   // Estructura
-  background: '#f7f0e3',    // Fondo principal (crudo cálido, nunca blanco puro)
+  background: '#f6e4ac',    // Fondo principal — amarillo mantequilla
   cardBg: '#ffffff',
-  border: '#e6d9c4',
+  border: '#e0c179',
 
   // Overlay para hero
-  heroOverlay: 'rgba(24, 17, 11, 0.84)',
+  heroOverlay: 'rgba(57, 18, 18, 0.84)',
 } as const;
 
 export type Theme = typeof theme;

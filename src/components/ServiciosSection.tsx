@@ -63,7 +63,7 @@ export default function ServiciosSection() {
               <div
                 className="absolute inset-0 opacity-[0.05]"
                 style={{
-                  backgroundImage: 'radial-gradient(circle, #f2e6d3 1px, transparent 1px)',
+                  backgroundImage: 'radial-gradient(circle, #eed694 1px, transparent 1px)',
                   backgroundSize: '28px 28px',
                 }}
               />

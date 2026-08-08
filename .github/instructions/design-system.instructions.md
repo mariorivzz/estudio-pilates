@@ -24,21 +24,25 @@ Definidos en `src/app/globals.css` (`:root`) y expuestos a Tailwind vía `@theme
 
 ```css
 :root {
-  --primary: #6b4a30;       /* Marrón café cálido */
-  --primary-dark: #4f3722;
-  --primary-light: #cbb59a;
-  --primary-bg: #f2e6d3;
-  --secondary: #241a12;      /* Texto principal */
-  --accent: #a97449;         /* Caramelo/terracota — CTAs de WhatsApp/reserva */
-  --accent-light: #f2ded0;
-  --highlight: #c9a24a;      /* Dorado suave — insignia "Próximamente" */
-  --highlight-bg: #f8f0dd;
-  --background: #f7f0e3;     /* Crudo/beige cálido — NUNCA #ffffff puro */
+  --primary: #74342b;        /* Marrón */
+  --primary-dark: #4a231c;
+  --primary-light: #d9a67e;
+  --primary-bg: #eed694;
+  --secondary: #391212;      /* Texto principal — marrón oscuro, también fondo de Hero/Footer */
+  --accent: #cc6a24;         /* Naranja — detallitos sueltos, CTAs de WhatsApp/reserva */
+  --accent-light: #f6dab8;
+  --highlight: #8fa4d1;      /* Azul — insignia "Próximamente" */
+  --highlight-dark: #2b3b64; /* Azul oscuro — fondo de sección, ej. CompromisoSection */
+  --highlight-bg: #e6ecf8;
+  --background: #f6e4ac;     /* Amarillo mantequilla — NUNCA #ffffff puro */
   --card-bg: #ffffff;
-  --border: #e6d9c4;
-  --muted: #7a6a58;
+  --border: #e0c179;
+  --muted: #6e4f36;
 }
 ```
+
+> Paleta anterior (marrón café + crudo/beige + dorado suave) queda comentada en
+> `src/app/globals.css` y `src/lib/theme.ts` por si hace falta revertir.
 
 No añadir variables `data-vertical="..."` ni temas alternativos — este proyecto es de un solo negocio.
 

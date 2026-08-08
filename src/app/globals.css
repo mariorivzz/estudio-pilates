@@ -1,21 +1,29 @@
 @import "tailwindcss";
 
 /* ── Variables del tema Calma Studio ─────────────────────── */
+/* Paleta anterior (marrón café + crudo/beige + dorado), por si hace falta
+   volver atrás — también en el historial de git:
+   --primary: #6b4a30; --primary-dark: #4f3722; --primary-light: #cbb59a;
+   --primary-bg: #f2e6d3; --secondary: #241a12; --accent: #a97449;
+   --accent-light: #f2ded0; --highlight: #c9a24a; --highlight-bg: #f8f0dd;
+   --background: #f7f0e3; --foreground: #241a12; --card-bg: #ffffff;
+   --border: #e6d9c4; --muted: #7a6a58; */
 :root {
-  --primary: #6b4a30;
-  --primary-dark: #4f3722;
-  --primary-light: #cbb59a;
-  --primary-bg: #f2e6d3;
-  --secondary: #241a12;
-  --accent: #a97449;
-  --accent-light: #f2ded0;
-  --highlight: #c9a24a;
-  --highlight-bg: #f8f0dd;
-  --background: #f7f0e3;
-  --foreground: #241a12;
+  --primary: #74342b;
+  --primary-dark: #4a231c;
+  --primary-light: #d9a67e;
+  --primary-bg: #eed694;
+  --secondary: #391212;
+  --accent: #cc6a24;
+  --accent-light: #f6dab8;
+  --highlight: #8fa4d1;
+  --highlight-dark: #2b3b64;
+  --highlight-bg: #e6ecf8;
+  --background: #f6e4ac;
+  --foreground: #391212;
   --card-bg: #ffffff;
-  --border: #e6d9c4;
-  --muted: #7a6a58;
+  --border: #e0c179;
+  --muted: #6e4f36;
 }
 
 /* ── Tailwind theme inline ───────────────────────────────── */
@@ -28,6 +36,7 @@
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
   --color-highlight: var(--highlight);
+  --color-highlight-dark: var(--highlight-dark);
   --color-highlight-bg: var(--highlight-bg);
   --color-background: var(--background);
   --color-foreground: var(--foreground);

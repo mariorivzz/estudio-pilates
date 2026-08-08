@@ -35,7 +35,7 @@ export default function CompromisoSection() {
   );
 
   return (
-    <section className="py-16 bg-secondary">
+    <section className="py-16 bg-highlight-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           {/* Icono y encabezado */}

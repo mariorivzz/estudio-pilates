@@ -42,7 +42,7 @@ export default function ContactoSection() {
               title={`Mapa de ubicación de ${siteConfig.businessName}`}
             />
             {siteConfig.comingSoon && (
-              <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-highlight text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+              <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-highlight text-secondary text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
                 <TbSparkles size={12} />
                 Próximamente
               </span>

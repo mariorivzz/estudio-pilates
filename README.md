@@ -48,7 +48,7 @@ src/
                   # CitasSection, ContactoSection, WhatsAppWidget
   lib/
     config.ts     # ⭐ Datos del negocio (editar aquí), SEO, textos del hero
-    theme.ts      # Paleta de colores (marrón café + crudo/beige + dorado)
+    theme.ts      # Paleta de colores (amarillo mantequilla + marrón + azul + naranja)
     utils.ts      # Helpers: teléfono, WhatsApp, fechas
 ```
 
@@ -72,8 +72,10 @@ Security headers configurados en `next.config.ts`:
 
 ## Diseño
 Paleta inspirada en la identidad real de Calma Studio (NO lavanda/spa genérico de IA):
-- **Primary:** `#6b4a30` (marrón café cálido)
-- **Accent:** `#a97449` (caramelo/terracota)
-- **Highlight:** `#c9a24a` (dorado suave — insignias de "Próximamente")
+- **Background:** `#f6e4ac` (amarillo mantequilla)
+- **Secondary (texto):** `#391212` (marrón oscuro)
+- **Primary:** `#74342b` (marrón)
+- **Highlight:** `#8fa4d1` (azul — insignias de "Próximamente")
+- **Accent:** `#cc6a24` (naranja — detallitos sueltos)
 - Tipografía: Geist (cuerpo) + Playfair Display (logotipo y titulares, estilo boutique)
 - Iconos: Tabler Icons (modernos, no típicos)

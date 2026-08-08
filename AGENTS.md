@@ -19,15 +19,19 @@ negocio.
 ## Diseño — Reglas Obligatorias
 
 ### Paleta de colores
-- Primary: `#6b4a30` (marrón café cálido)
-- Primary-dark: `#4f3722`
-- Primary-light: `#cbb59a`
-- Primary-bg: `#f2e6d3`
-- Accent: `#a97449` (caramelo/terracota — usado en CTAs de WhatsApp/reserva)
-- Highlight: `#c9a24a` (dorado suave — usado en la insignia "Próximamente")
-- Background: `#f7f0e3` (crudo/beige cálido, nunca blanco puro)
-- Secondary (texto): `#241a12`
+- Background: `#f6e4ac` (amarillo mantequilla — nunca blanco puro)
+- Secondary (texto principal): `#391212` (marrón oscuro — también fondo de secciones oscuras como Hero/Footer)
+- Primary: `#74342b` (marrón — branding, botones, headings)
+- Primary-dark: `#4a231c` (hover states / cards oscuras)
+- Primary-light: `#d9a67e`
+- Primary-bg: `#eed694`
+- Highlight: `#8fa4d1` (azul — insignia "Próximamente" y acentos puntuales)
+- Highlight-dark: `#2b3b64` (azul oscuro — fondo de sección, ej. `CompromisoSection`)
+- Accent: `#cc6a24` (naranja — detallitos sueltos: iconos, CTAs de WhatsApp/reserva)
 - Tipografía: Geist (cuerpo) + Playfair Display (logotipo "calma studio" y titulares, estilo boutique)
+
+> Paleta anterior (marrón café + crudo/beige + dorado suave) guardada como comentario en
+> `src/lib/theme.ts` y `src/app/globals.css`, y disponible en el historial de git.
 
 ### Anti-diseño-IA (obligatorio)
 - NO gradientes de 3+ colores
