@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { siteConfig } from "@/lib/config";
 import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
@@ -52,6 +53,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <WhatsAppWidget />
       </body>
     </html>
   );
