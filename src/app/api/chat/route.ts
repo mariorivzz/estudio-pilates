@@ -1,10 +1,10 @@
+import { GroqConfigError, streamChatCompletion, type ChatMessage } from '@/lib/chatbot/groqClient';
 import { getChatbotKnowledge } from '@/lib/chatbot/knowledge';
 import { checkRateLimit } from '@/lib/chatbot/rateLimit';
 import { buildSystemPrompt } from '@/lib/chatbot/systemPrompt';
-import { streamChatCompletion, XAIConfigError, type ChatMessage } from '@/lib/chatbot/xaiClient';
 import { NextRequest } from 'next/server';
 
-// Node.js runtime: el rate limiter en memoria y el proxy del stream de xAI
+// Node.js runtime: el rate limiter en memoria y el proxy del stream de Groq
 // no necesitan (ni se benefician de) el runtime Edge aquí.
 export const runtime = 'nodejs';
 
@@ -70,21 +70,21 @@ export async function POST(request: NextRequest) {
   try {
     upstream = await streamChatCompletion([systemMessage, ...history]);
   } catch (error) {
-    if (error instanceof XAIConfigError) {
+    if (error instanceof GroqConfigError) {
       console.error('[api/chat] Configuración inválida:', error.message);
       return jsonError('El asistente no está disponible ahora mismo. Escríbenos por WhatsApp.', 503);
     }
-    console.error('[api/chat] Error de red llamando a xAI:', error);
+    console.error('[api/chat] Error de red llamando a Groq:', error);
     return jsonError('No hemos podido conectar con el asistente. Inténtalo de nuevo o escríbenos por WhatsApp.', 502);
   }
 
   if (!upstream.ok || !upstream.body) {
     const detail = await upstream.text().catch(() => '(sin detalle)');
-    console.error('[api/chat] xAI respondió con error:', upstream.status, detail);
+    console.error('[api/chat] Groq respondió con error:', upstream.status, detail);
     return jsonError('El asistente no ha podido responder. Inténtalo de nuevo en unos segundos.', 502);
   }
 
-  // Reenviamos el stream SSE de xAI tal cual — el cliente ya lo parsea en
+  // Reenviamos el stream SSE de Groq tal cual — el cliente ya lo parsea en
   // formato OpenAI (delta.content), no hace falta reprocesarlo aquí.
   return new Response(upstream.body, {
     status: 200,

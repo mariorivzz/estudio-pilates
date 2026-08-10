@@ -1,33 +1,59 @@
-# Chatbot IA (Grok / xAI) — notas de arquitectura
+# Chatbot IA (Groq) — notas de arquitectura
 
 Asistente conversacional integrado en la landing de Calma Studio para resolver dudas de
 visitantes sobre servicios, horarios, ubicación y reservas. Primera implementación del
 patrón; pensado para portarse después a las versiones Drupal y WordPress de la misma landing.
 
+## Nota: cambio de proveedor (xAI → Groq)
+
+El encargo original pedía explícitamente **Grok, el modelo de xAI**. La primera
+implementación se hizo así (ver Fase 0 más abajo). Al probarla, la clave API que se había
+generado resultó ser de **Groq** (`console.groq.com`, prefijo de clave `gsk_`) — un
+proveedor de inferencia distinto, sin relación con xAI, fácil de confundir por el nombre:
+Groq aloja modelos abiertos (Llama, GPT-OSS...) a muy baja latencia; xAI es la empresa que
+entrena y sirve los modelos Grok. Una clave de uno no autentica contra el otro.
+
+Confirmado con el usuario, se decidió adaptar la implementación a Groq en vez de conseguir
+una clave real de xAI, ya que esa era la clave ya disponible. El cambio fue mecánico porque
+la API de Groq también es **compatible con OpenAI** (mismo endpoint de forma, mismo formato
+de streaming SSE): solo cambió `src/lib/chatbot/groqClient.ts` (antes `xaiClient.ts`), las
+variables de entorno (`GROQ_API_KEY`/`GROQ_MODEL` en vez de `XAI_API_KEY`/`XAI_MODEL`) y el
+modelo por defecto. El resto de la arquitectura descrita en este documento (aislamiento de
+la lógica, guardrails, rate limiting, accesibilidad, guía de portabilidad) no cambió.
+
 ## Fase 0 — lo confirmado antes de implementar
 
-No se asumió ningún nombre de modelo ni forma de la API desde memoria: se consultó
-`docs.x.ai` en el momento de implementar (agosto 2026) y se confirmó, con varias consultas
-independientes:
+No se asumió ningún nombre de modelo ni forma de la API desde memoria: se consultó la
+documentación oficial en el momento de implementar cada versión (agosto 2026).
 
-- Endpoint: `POST https://api.x.ai/v1/chat/completions`, formato **compatible con OpenAI**
-  (`messages`, `role`/`content`, `stream: true`), autenticación `Authorization: Bearer <key>`.
+**Investigación original (xAI/Grok, superseded — ver nota de arriba):**
+Se consultó `docs.x.ai` y se confirmó, con varias consultas independientes: endpoint
+`POST https://api.x.ai/v1/chat/completions`, formato compatible con OpenAI, streaming SSE
+estándar, y un catálogo de modelos vigente en ese momento (`grok-4.5`, `grok-4.3`,
+variantes `grok-4.20-0309-*`, `grok-build-0.1`). Se había elegido `grok-4.3` como el más
+adecuado en coste/calidad para FAQs de un negocio pequeño. Esta investigación quedó
+invalidada al descubrir que la clave disponible era de Groq, no de xAI — se conserva aquí
+solo como referencia por si en el futuro se retoma xAI de verdad.
+
+**Investigación vigente (Groq):** se consultó `console.groq.com/docs` y se confirmó:
+
+- Endpoint: `POST https://api.groq.com/openai/v1/chat/completions`, formato **compatible
+  con OpenAI** (`messages`, `role`/`content`, `stream: true`), autenticación
+  `Authorization: Bearer <key>` — mismo shape que xAI, por eso el cambio de proveedor no
+  tocó `route.ts` ni `ChatWidget.tsx`.
 - Streaming vía SSE: `data: {...}` por chunk con `choices[0].delta.content`, termina en
-  `data: [DONE]` — igual que el formato de OpenAI, sin sorpresas.
-- Modelos disponibles en el momento de escribir esto: `grok-4.5` (flagship, más caro),
-  `grok-4.3` (flagship estándar, 1M contexto, $1.25/$2.50 por millón de tokens
-  input/output), variantes `grok-4.20-0309-*` (reasoning/non-reasoning/multi-agent, mismo
-  precio que 4.3) y `grok-build-0.1` (orientado a código, más barato, 256k contexto).
-- **Elegido: `grok-4.3`.** Para responder preguntas frecuentes de un negocio pequeño no
-  hace falta el modelo de razonamiento más caro (`grok-4.5`); `grok-4.3` da buena calidad
-  de instrucción-seguimiento en español a un coste bajo. El nombre del modelo **no está
-  hardcodeado** — es `XAI_MODEL` en variables de entorno (por defecto `grok-4.3` en
-  `src/lib/chatbot/xaiClient.ts`), porque xAI retira y sustituye modelos con frecuencia.
-
-xAI también expone un endpoint `/v1/responses` más nuevo (con herramientas propias tipo
-agente); se descartó para este caso porque `/v1/chat/completions` es el formato estándar,
-más simple, y el que de verdad importa portar a PHP sin depender de convenciones propias
-de xAI.
+  `data: [DONE]`.
+- Modelos de producción disponibles en el momento de escribir esto: `llama-3.3-70b-versatile`
+  y `llama-3.1-8b-instant` (Meta, recomendados para chat general), `openai/gpt-oss-120b` y
+  `openai/gpt-oss-20b` (modelos abiertos de OpenAI), además de `groq/compound` y
+  `groq/compound-mini` (sistemas agénticos con herramientas propias, no aplican aquí) y
+  modelos de voz (`whisper-large-v3*`).
+- **Elegido: `llama-3.3-70b-versatile`.** Es el modelo que Groq recomienda para chat/
+  instrucciones generales, con buena calidad en español y contexto de sobra (131k tokens)
+  para este caso de uso. El nombre del modelo **no está hardcodeado** — es `GROQ_MODEL` en
+  variables de entorno (por defecto `llama-3.3-70b-versatile` en
+  `src/lib/chatbot/groqClient.ts`), porque el catálogo de modelos también cambia con
+  cierta frecuencia en Groq.
 
 ## Decisiones de arquitectura y por qué
 
@@ -56,7 +82,7 @@ función que rellene este mismo shape desde los campos del CMS", no un rediseño
 
 ### 2. Dónde vive la llamada a la API: Route Handler, servidor únicamente
 
-`src/app/api/chat/route.ts` (Next.js Route Handler). La API key (`XAI_API_KEY`) solo se lee
+`src/app/api/chat/route.ts` (Next.js Route Handler). La API key (`GROQ_API_KEY`) solo se lee
 en `process.env` dentro de este archivo server-side — nunca llega al cliente, no está en
 ningún componente `'use client'`, no viaja en el bundle. Esto no era negociable y no se ha
 encontrado ninguna razón para desviarse.
@@ -70,7 +96,7 @@ stream" hace el port más mecánico.
 ### 3. Widget: implementación propia, sin Vercel AI SDK
 
 Se evaluó usar el Vercel AI SDK (`ai` + `@ai-sdk/react`, con un provider compatible con
-OpenAI apuntando a xAI) frente a construirlo a mano. Se optó por construirlo a mano:
+OpenAI) frente a construirlo a mano. Se optó por construirlo a mano:
 
 - El proyecto no tiene **ninguna** dependencia de runtime más allá de
   `next` / `react` / `react-icons` — es una decisión de diseño explícita de este repo
@@ -123,11 +149,11 @@ toda la información del prompt ya es pública en la web).
 ### 6. Manejo de errores
 
 Tres capas, todas con mensaje en español y sin romper la página:
-- `XAI_API_KEY` no configurada → 503 con aviso claro + enlace a WhatsApp (así se comportará
+- `GROQ_API_KEY` no configurada → 503 con aviso claro + enlace a WhatsApp (así se comportará
   el sitio hasta que se añada la key real en producción).
-- Error de red / xAI caído / respuesta no-OK → 502, mismo tipo de aviso.
+- Error de red / Groq caído / respuesta no-OK → 502, mismo tipo de aviso.
 - Errores de validación del body (mensajes vacíos, demasiado largos, conversación
-  demasiado larga) → 400, antes de gastar ninguna llamada a xAI.
+  demasiado larga) → 400, antes de gastar ninguna llamada a Groq.
 
 En el cliente (`ChatWidget.tsx`), cualquier error visible muestra el mensaje + un botón de
 WhatsApp con el número real del centro (`buildWhatsAppUrl`, reutilizando el helper ya
@@ -157,7 +183,7 @@ intrusivo, sin apertura automática ni mensajes proactivos.
 
 ## Qué falta antes de publicar
 
-- **`XAI_API_KEY` real** en las variables de entorno de Vercel (Project Settings →
+- **`GROQ_API_KEY` real** en las variables de entorno de Vercel (Project Settings →
   Environment Variables) y en `.env.local` para desarrollo (ver `.env.example`). Sin ella,
   el bot muestra el aviso de "no disponible" y deriva a WhatsApp — el sitio sigue
   funcionando con normalidad.
@@ -177,12 +203,12 @@ La lógica está deliberadamente repartida así para que solo una carpeta cambie
 |---|---|---|---|
 | Conocimiento | `lib/chatbot/knowledge.ts` | Objeto plano con los datos del centro | Función PHP/`functions.php` que arme el mismo shape desde campos de un content type (Drupal) o custom post type / ACF (WordPress) en vez de `siteConfig` |
 | System prompt | `lib/chatbot/systemPrompt.ts` | Función pura `knowledge → string` | Traducción 1:1 a una función PHP con el mismo template — no toca nada de Next.js |
-| Cliente xAI | `lib/chatbot/xaiClient.ts` | `fetch` POST a `api.x.ai/v1/chat/completions` | Misma llamada con `cURL` (o `wp_remote_post`/Guzzle), mismo body JSON, mismo header `Authorization: Bearer` |
+| Cliente Groq | `lib/chatbot/groqClient.ts` | `fetch` POST a `api.groq.com/openai/v1/chat/completions` | Misma llamada con `cURL` (o `wp_remote_post`/Guzzle), mismo body JSON, mismo header `Authorization: Bearer` |
 | Rate limit | `lib/chatbot/rateLimit.ts` | Ventana fija en memoria | Sustituir por transient de WordPress (`set_transient`/`get_transient`) o `\Drupal::cache()` con TTL — la clave sigue siendo la IP |
 | Endpoint | `app/api/chat/route.ts` | Route Handler: valida, aplica rate limit, llama, reenvía el stream | Endpoint REST custom en Drupal (`RestResourceBase`) o WordPress (`register_rest_route`), con la misma validación y el mismo passthrough de SSE |
 | Widget | `components/ChatWidget.tsx` | UI + fetch + parseo SSE manual | Un script vanilla JS (sin React) que hace el mismo `fetch` + parseo de `data:` lines contra el nuevo endpoint, insertado como asset del tema/módulo |
 
 Lo que **no** se porta 1:1 porque es específico de Next.js: el propio Route Handler como
 archivo (`route.ts`), el uso de `NextRequest`, y el componente React del widget. Todo lo
-demás (`knowledge.ts`, `systemPrompt.ts`, la forma del body que se envía a xAI) es
+demás (`knowledge.ts`, `systemPrompt.ts`, la forma del body que se envía a Groq) es
 JSON/string puro y se traduce prácticamente literal.

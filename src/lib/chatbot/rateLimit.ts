@@ -1,7 +1,7 @@
 // ─── Rate limiting básico (en memoria) ───────────────────────
 //
 // Ventana fija por IP para evitar abuso y costes descontrolados en la API
-// de xAI. Vive en un Map a nivel de módulo dentro de la instancia serverless:
+// de Groq. Vive en un Map a nivel de módulo dentro de la instancia serverless:
 // es suficiente para el tráfico esperado de esta landing, pero tiene dos
 // límites conocidos que documentamos en chatbot-notes.md:
 //   1. No persiste entre cold starts (se reinicia el contador).

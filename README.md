@@ -40,7 +40,7 @@ npm run dev
 Abre [http://localhost:3000](http://localhost:3000).
 
 Para que el chatbot funcione en local, copia `.env.example` a `.env.local` y añade tu
-`XAI_API_KEY` (ver [Chatbot](#chatbot-ia)). Sin la clave, el sitio funciona igual pero el
+`GROQ_API_KEY` (ver [Chatbot](#chatbot-ia)). Sin la clave, el sitio funciona igual pero el
 asistente muestra un aviso y deriva a WhatsApp.
 
 ## Estructura
@@ -48,7 +48,7 @@ asistente muestra un aviso y deriva a WhatsApp.
 ```
 src/
   app/
-    api/chat/route.ts  # Route Handler del chatbot (llama a xAI, streaming SSE)
+    api/chat/route.ts  # Route Handler del chatbot (llama a Groq, streaming SSE)
     ...                # layout, page, globals.css, error, loading
   components/     # Navbar, Footer, Hero, CompromisoSection, ServiciosSection,
                   # CitasSection, ContactoSection, WhatsAppWidget, ChatWidget
@@ -59,7 +59,7 @@ src/
     chatbot/      # Lógica del chatbot, aislada de React (portable a Drupal/WordPress)
       knowledge.ts     # Base de conocimiento del centro
       systemPrompt.ts  # Prompt + guardrails
-      xaiClient.ts     # Llamada a la API de xAI
+      groqClient.ts    # Llamada a la API de Groq
       rateLimit.ts     # Rate limiting en memoria
 ```
 
@@ -68,12 +68,13 @@ modifica `src/lib/config.ts`.
 
 ## Chatbot (IA)
 
-Asistente conversacional (Grok, vía API de xAI) integrado como widget flotante
+Asistente conversacional (Llama 3.3, vía API de Groq) integrado como widget flotante
 (`ChatWidget.tsx`), separado del botón de WhatsApp. Responde dudas sobre servicios, horarios,
 ubicación y reservas usando solo los datos reales de `siteConfig`. Detalles de arquitectura,
-decisiones y guía de portabilidad a Drupal/WordPress en [`chatbot-notes.md`](./chatbot-notes.md).
+decisiones (incluido el cambio de proveedor de xAI a Groq) y guía de portabilidad a
+Drupal/WordPress en [`chatbot-notes.md`](./chatbot-notes.md).
 
-Requiere `XAI_API_KEY` en variables de entorno (ver `.env.example`) — nunca se expone al
+Requiere `GROQ_API_KEY` en variables de entorno (ver `.env.example`) — nunca se expone al
 cliente, solo se usa en `src/app/api/chat/route.ts`.
 
 ## Contacto por WhatsApp
