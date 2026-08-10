@@ -39,21 +39,42 @@ npm run dev
 
 Abre [http://localhost:3000](http://localhost:3000).
 
+Para que el chatbot funcione en local, copia `.env.example` a `.env.local` y añade tu
+`XAI_API_KEY` (ver [Chatbot](#chatbot-ia)). Sin la clave, el sitio funciona igual pero el
+asistente muestra un aviso y deriva a WhatsApp.
+
 ## Estructura
 
 ```
 src/
-  app/            # App Router: layout, page, globals.css, error, loading
+  app/
+    api/chat/route.ts  # Route Handler del chatbot (llama a xAI, streaming SSE)
+    ...                # layout, page, globals.css, error, loading
   components/     # Navbar, Footer, Hero, CompromisoSection, ServiciosSection,
-                  # CitasSection, ContactoSection, WhatsAppWidget
+                  # CitasSection, ContactoSection, WhatsAppWidget, ChatWidget
   lib/
     config.ts     # ⭐ Datos del negocio (editar aquí), SEO, textos del hero
     theme.ts      # Paleta de colores (amarillo mantequilla + marrón + azul + naranja)
     utils.ts      # Helpers: teléfono, WhatsApp, fechas
+    chatbot/      # Lógica del chatbot, aislada de React (portable a Drupal/WordPress)
+      knowledge.ts     # Base de conocimiento del centro
+      systemPrompt.ts  # Prompt + guardrails
+      xaiClient.ts     # Llamada a la API de xAI
+      rateLimit.ts     # Rate limiting en memoria
 ```
 
 Para editar textos, teléfono, horario, dirección o el mensaje del asistente de WhatsApp,
 modifica `src/lib/config.ts`.
+
+## Chatbot (IA)
+
+Asistente conversacional (Grok, vía API de xAI) integrado como widget flotante
+(`ChatWidget.tsx`), separado del botón de WhatsApp. Responde dudas sobre servicios, horarios,
+ubicación y reservas usando solo los datos reales de `siteConfig`. Detalles de arquitectura,
+decisiones y guía de portabilidad a Drupal/WordPress en [`chatbot-notes.md`](./chatbot-notes.md).
+
+Requiere `XAI_API_KEY` en variables de entorno (ver `.env.example`) — nunca se expone al
+cliente, solo se usa en `src/app/api/chat/route.ts`.
 
 ## Contacto por WhatsApp
 

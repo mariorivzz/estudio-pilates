@@ -1,3 +1,4 @@
+import ChatWidget from "@/components/ChatWidget";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
@@ -54,6 +55,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppWidget />
+        <ChatWidget />
       </body>
     </html>
   );
