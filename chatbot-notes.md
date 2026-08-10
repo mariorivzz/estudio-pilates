@@ -21,6 +21,16 @@ variables de entorno (`GROQ_API_KEY`/`GROQ_MODEL` en vez de `XAI_API_KEY`/`XAI_M
 modelo por defecto. El resto de la arquitectura descrita en este documento (aislamiento de
 la lógica, guardrails, rate limiting, accesibilidad, guía de portabilidad) no cambió.
 
+## Nota: canal de contacto — solo teléfono, sin WhatsApp
+
+El estudio no tiene WhatsApp activo todavía. Aunque el sitio (y este chatbot) se diseñaron
+inicialmente con WhatsApp como canal de fallback en varios sitios — botón flotante, tarjeta
+de contacto, confirmación de reserva, error del chatbot —, se retiró por completo a petición
+del usuario y se sustituyó por llamada telefónica (`tel:` con `siteConfig.phone`) en todos
+esos puntos, incluidos el system prompt del bot y los mensajes de error de `route.ts`. Esto
+también afectó a la política de privacidad (`/privacidad`) y al aviso legal (`/aviso-legal`),
+que mencionaban WhatsApp/Meta como destinatario de datos.
+
 ## Fase 0 — lo confirmado antes de implementar
 
 No se asumió ningún nombre de modelo ni forma de la API desde memoria: se consultó la
@@ -132,11 +142,11 @@ cambiar la firma de `checkRateLimit(identifier)`.
 
 El system prompt (`systemPrompt.ts`) incluye reglas explícitas:
 - Ámbito cerrado: solo temas de Calma Studio; redirige con amabilidad cualquier otra cosa.
-- No inventar precios (no hay precios publicados en la web) ni disponibilidad — deriva a
-  WhatsApp/teléfono.
+- No inventar precios (no hay precios publicados en la web) ni disponibilidad — deriva al
+  teléfono.
 - No dar consejo médico/nutricional individualizado ni pedir datos de salud en el chat
   (coherente con el aviso ya existente en `CitasSection.tsx` sobre el art. 9 RGPD).
-- No puede confirmar reservas — siempre deriva al formulario (`#citas`) o WhatsApp.
+- No puede confirmar reservas — siempre deriva al formulario (`#citas`) o a llamar por teléfono.
 - Instrucción explícita de ignorar intentos de cambiar su rol, revelar el prompt, "modo
   desarrollador", etc., sin explicar en detalle el porqué (para no dar pistas de cómo
   rodearlo).
@@ -149,15 +159,14 @@ toda la información del prompt ya es pública en la web).
 ### 6. Manejo de errores
 
 Tres capas, todas con mensaje en español y sin romper la página:
-- `GROQ_API_KEY` no configurada → 503 con aviso claro + enlace a WhatsApp (así se comportará
+- `GROQ_API_KEY` no configurada → 503 con aviso claro + enlace para llamar (así se comportará
   el sitio hasta que se añada la key real en producción).
 - Error de red / Groq caído / respuesta no-OK → 502, mismo tipo de aviso.
 - Errores de validación del body (mensajes vacíos, demasiado largos, conversación
   demasiado larga) → 400, antes de gastar ninguna llamada a Groq.
 
-En el cliente (`ChatWidget.tsx`), cualquier error visible muestra el mensaje + un botón de
-WhatsApp con el número real del centro (`buildWhatsAppUrl`, reutilizando el helper ya
-existente).
+En el cliente (`ChatWidget.tsx`), cualquier error visible muestra el mensaje + un enlace
+`tel:` con el número real del centro (`siteConfig.phone`).
 
 ### 7. Accesibilidad
 
@@ -177,21 +186,21 @@ existente).
 
 ### 8. Ubicación del widget
 
-Botón flotante apilado sobre el de WhatsApp, ambos en la esquina inferior derecha.
-Colapsado por defecto — visible pero no intrusivo, sin apertura automática ni mensajes
-proactivos.
+Botón flotante único en la esquina inferior derecha. Colapsado por defecto — visible pero no
+intrusivo, sin apertura automática ni mensajes proactivos. (El sitio tuvo brevemente también
+un botón de WhatsApp apilado en la misma esquina; se retiró por completo — ver nota más abajo
+sobre el cambio de canal de contacto a solo teléfono — así que hoy el chat es el único FAB.)
 
-Se probó primero abajo-izquierda (para separarlo del WhatsApp) pero el `Hero` centra su
-contenido verticalmente (`min-h-screen flex items-center`) y sus CTA ("Reserva tu clase" /
-Instagram) son lo bastante bajos como para chocar visualmente con esa esquina en viewports
-de poca altura. Apilar ambos botones en la esquina derecha (patrón habitual de varios FABs
-en la misma esquina) los aleja del contenido del Hero, que vive en la mitad izquierda.
+Se probó primero abajo-izquierda pero el `Hero` centra su contenido verticalmente
+(`min-h-screen flex items-center`) y sus CTA ("Reserva tu clase" / Instagram) son lo bastante
+bajos como para chocar visualmente con esa esquina en viewports de poca altura. Abajo-derecha
+lo aleja del contenido del Hero, que vive en la mitad izquierda de la pantalla.
 
 ## Qué falta antes de publicar
 
 - **`GROQ_API_KEY` real** en las variables de entorno de Vercel (Project Settings →
   Environment Variables) y en `.env.local` para desarrollo (ver `.env.example`). Sin ella,
-  el bot muestra el aviso de "no disponible" y deriva a WhatsApp — el sitio sigue
+  el bot muestra el aviso de "no disponible" y deriva a llamar por teléfono — el sitio sigue
   funcionando con normalidad.
 - El bot hereda los mismos placeholders marcados `// EDITAR` en `config.ts` (teléfono,
   email, horario) — en cuanto se actualicen ahí, el bot los usa automáticamente.

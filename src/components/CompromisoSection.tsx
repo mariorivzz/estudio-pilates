@@ -1,7 +1,6 @@
 import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
-import { buildWhatsAppUrl } from '@/lib/utils';
-import { TbApple, TbBrandWhatsapp, TbCheck, TbSparkles, TbUsers } from 'react-icons/tb';
+import { TbApple, TbCheck, TbPhoneCall, TbSparkles, TbUsers } from 'react-icons/tb';
 
 const puntos = [
   {
@@ -29,11 +28,6 @@ const chips = [
 ];
 
 export default function CompromisoSection() {
-  const whatsappUrl = buildWhatsAppUrl(
-    siteConfig.phone,
-    `Hola, me gustaría más información sobre ${siteConfig.businessName}.`
-  );
-
   return (
     <section className="py-16 bg-highlight-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,13 +75,11 @@ export default function CompromisoSection() {
             </div>
 
             <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`tel:${siteConfig.phone}`}
               className="inline-flex items-center gap-2.5 bg-accent hover:bg-accent/85 text-white px-7 py-4 rounded-full font-semibold transition-colors text-base shadow-lg whitespace-nowrap"
             >
-              <TbBrandWhatsapp size={20} />
-              Escríbenos ahora
+              <TbPhoneCall size={20} />
+              Llámanos ahora
             </a>
           </ScrollReveal>
         </div>

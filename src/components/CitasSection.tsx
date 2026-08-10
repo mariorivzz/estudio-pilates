@@ -3,17 +3,17 @@
 import BookingEmbed from '@/components/BookingEmbed';
 import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
-import { buildWhatsAppUrl, formatDateES, getTomorrowDate } from '@/lib/utils';
+import { formatDateES, getTomorrowDate } from '@/lib/utils';
 import Link from 'next/link';
 import { useState } from 'react';
 import {
     TbArrowRight,
-    TbBrandWhatsapp,
     TbCalendar,
     TbCalendarWeek,
     TbCheck,
     TbNotes,
     TbPhone,
+    TbPhoneCall,
     TbUser,
     TbYoga
 } from 'react-icons/tb';
@@ -61,7 +61,7 @@ const INITIAL_FORM: FormData = {
   consentimiento: false,
 };
 
-/** Con proveedor de reservas dado de alta se muestra su calendario; si no, el formulario a WhatsApp. */
+/** Con proveedor de reservas dado de alta se muestra su calendario; si no, el formulario a teléfono. */
 const useBookingWidget = siteConfig.booking.enabled && siteConfig.booking.embedUrl.length > 0;
 
 export default function CitasSection() {
@@ -100,10 +100,7 @@ export default function CitasSection() {
     setSubmitted(true);
   };
 
-  const whatsappUrl = buildWhatsAppUrl(
-    siteConfig.phone,
-    `Hola, quisiera reservar una clase:\n\n👤 Nombre: ${formData.nombre}\n📞 Teléfono: ${formData.telefono}\n🧘 Clase: ${formData.tipoClase} (${formData.nivel})\n📅 Fecha preferida: ${formatDateES(formData.fecha)}${formData.horario ? ` a las ${formData.horario}` : ''}\n${formData.notas ? `📝 Notas: ${formData.notas}` : ''}`
-  );
+  const phoneCallUrl = `tel:${siteConfig.phone}`;
 
   if (submitted) {
     return (
@@ -114,28 +111,28 @@ export default function CitasSection() {
               <TbCheck className="text-primary" size={36} />
             </div>
             <h3 className="text-3xl font-bold text-secondary mb-3">¡Solicitud lista!</h3>
-            <p className="text-muted text-lg mb-2">
-              Tus datos están preparados. Confirma tu reserva por WhatsApp para que podamos recibirla.
-            </p>
-            <p className="text-muted text-sm mb-8">
-              También puedes llamarnos al <strong className="text-secondary">{siteConfig.phone.replace('+34 ', '')}</strong>
+            <p className="text-muted text-lg mb-8">
+              Llámanos al <strong className="text-secondary">{siteConfig.phone.replace('+34 ', '')}</strong>{' '}
+              y coméntanos estos datos para confirmar tu reserva.
             </p>
 
-            {/* Resumen */}
+            {/* Resumen — para tenerlo a mano durante la llamada */}
             <div className="bg-white rounded-xl p-6 text-left space-y-2.5 mb-8 border border-border">
+              <p className="text-sm"><span className="font-semibold text-secondary">Nombre:</span> <span className="text-muted">{formData.nombre}</span></p>
               <p className="text-sm"><span className="font-semibold text-secondary">Clase:</span> <span className="text-muted">{formData.tipoClase} ({formData.nivel})</span></p>
               <p className="text-sm"><span className="font-semibold text-secondary">Fecha:</span> <span className="text-muted">{formatDateES(formData.fecha)}{formData.horario ? ` · ${formData.horario}h` : ''}</span></p>
+              {formData.notas && (
+                <p className="text-sm"><span className="font-semibold text-secondary">Notas:</span> <span className="text-muted">{formData.notas}</span></p>
+              )}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-7 py-3.5 rounded-full font-semibold transition-colors"
+                href={phoneCallUrl}
+                className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white px-7 py-3.5 rounded-full font-semibold transition-colors"
               >
-                <TbBrandWhatsapp size={20} />
-                Confirmar por WhatsApp
+                <TbPhoneCall size={20} />
+                Llamar ahora
               </a>
               <button
                 onClick={() => { setSubmitted(false); setFormData(INITIAL_FORM); }}
@@ -166,7 +163,7 @@ export default function CitasSection() {
             <p className="text-muted text-lg leading-relaxed mb-10">
               {useBookingWidget
                 ? 'Elige el día y la hora que mejor te vengan y reserva tu plaza al instante.'
-                : 'Rellena el formulario y te confirmamos la plaza por WhatsApp o teléfono en el mismo día.'}
+                : 'Rellena el formulario y te confirmamos la plaza por teléfono en el mismo día.'}
             </p>
 
             {/* Puntos clave */}
@@ -221,7 +218,7 @@ export default function CitasSection() {
             </div>
           </ScrollReveal>
 
-          {/* Calendario del proveedor o, mientras no lo haya, formulario a WhatsApp */}
+          {/* Calendario del proveedor o, mientras no lo haya, formulario a llamada telefónica */}
           {useBookingWidget ? (
             <ScrollReveal animation="fade-in-up" delay={200}>
               <BookingEmbed />
@@ -409,8 +406,8 @@ export default function CitasSection() {
               </button>
 
               <p className="text-center text-xs text-muted">
-                Al enviar se abre WhatsApp con tu solicitud redactada: los datos viajan por
-                WhatsApp (Meta) y no se envían a ningún otro servidor.
+                Al enviar verás un resumen para confirmar tu reserva por teléfono: tus datos no
+                se envían a ningún servidor.
               </p>
             </form>
           </ScrollReveal>

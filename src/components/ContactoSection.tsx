@@ -1,14 +1,8 @@
 import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
-import { buildWhatsAppUrl } from '@/lib/utils';
-import { TbBrandInstagram, TbBrandWhatsapp, TbClock, TbMail, TbPhone, TbSparkles } from 'react-icons/tb';
+import { TbBrandInstagram, TbClock, TbMail, TbPhone, TbSparkles } from 'react-icons/tb';
 
 export default function ContactoSection() {
-  const whatsappUrl = buildWhatsAppUrl(
-    siteConfig.phone,
-    `Hola, me gustaría pedir información sobre ${siteConfig.businessName}.`
-  );
-
   return (
     <section id="contacto" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,22 +60,6 @@ export default function ContactoSection() {
               <div>
                 <p className="text-xs text-muted uppercase tracking-wider mb-0.5">Teléfono</p>
                 <p className="font-semibold text-secondary">{siteConfig.phone.replace('+34 ', '')}</p>
-              </div>
-            </a>
-
-            {/* WhatsApp */}
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card p-5 flex items-start gap-4 group border-accent/20 hover:border-accent/40"
-            >
-              <div className="w-11 h-11 bg-accent/8 rounded-xl flex items-center justify-center shrink-0">
-                <TbBrandWhatsapp className="text-accent" size={20} />
-              </div>
-              <div>
-                <p className="text-xs text-accent uppercase tracking-wider mb-0.5 font-semibold">WhatsApp</p>
-                <p className="font-semibold text-secondary">Escríbenos ahora</p>
               </div>
             </a>
 

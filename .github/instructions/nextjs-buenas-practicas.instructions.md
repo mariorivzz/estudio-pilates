@@ -20,7 +20,7 @@ export default function ServiciosSection() {
 ### Cuándo usar `'use client'`
 
 Solo cuando el componente necesita `useState`/`useEffect`, event handlers, o APIs de navegador.
-En este proyecto: `Navbar` (menú móvil), `CitasSection` (formulario), `WhatsAppWidget` (enlace dinámico).
+En este proyecto: `Navbar` (menú móvil), `CitasSection` (formulario), `ChatWidget` (estado + streaming).
 
 ## Metadata y SEO
 

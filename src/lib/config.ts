@@ -59,10 +59,6 @@ export interface SiteConfig {
     keywords: string[];
     schemaType: string;
   };
-  whatsappAssistant: {
-    label: string;
-    message: string;
-  };
   legal: {
     razonSocial: string;
     nif: string;
@@ -70,7 +66,7 @@ export interface SiteConfig {
     emailPrivacidad: string;
   };
   booking: {
-    /** `false` mantiene el formulario que deriva a WhatsApp; `true` muestra el widget del proveedor. */
+    /** `false` mantiene el formulario que deriva a llamada telefónica; `true` muestra el widget del proveedor. */
     enabled: boolean;
     /** Nombre del proveedor, mostrado en el aviso de cesión de datos del formulario. */
     providerName: string;
@@ -144,11 +140,6 @@ export const siteConfig: SiteConfig = {
       'estudio de pilates y barre Salamanca',
     ],
     schemaType: 'ExerciseGym',
-  },
-  whatsappAssistant: {
-    label: 'Habla con nuestro asistente',
-    message:
-      'Hola 👋 Me gustaría hablar con el asistente de Calma Studio para consultar clases de Pilates, Barre y nutrición.',
   },
   // ⭐ EDITAR (obligatorio antes de publicar): la LSSI-CE exige identificar al
   // titular del sitio con datos reales. No son públicos, así que van vacíos a

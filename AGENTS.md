@@ -11,8 +11,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Proyecto
 Sitio web estático (Next.js 16 + Tailwind CSS 4) para **Calma Studio**, el primer centro de
 Barre de Salamanca (Pilates + Barre + Nutrición), próximamente en Avda. Federico Anaya, 71.
-Sin backend — formulario de reservas (`CitasSection`) y botón flotante (`WhatsAppWidget`)
-redirigen a WhatsApp. Réplica arquitectónica de los proyectos hermanos
+Sin backend propio — el formulario de reservas (`CitasSection`) y todos los CTA de contacto
+del sitio derivan a llamada telefónica (`tel:`); el estudio no usa WhatsApp actualmente, no
+añadir enlaces `wa.me` sin que el usuario lo pida explícitamente. Sí cuenta con un chatbot
+(`ChatWidget.tsx` + Route Handler `src/app/api/chat`, ver `chatbot-notes.md`) que llama a la
+API de Groq desde el servidor. Réplica arquitectónica de los proyectos hermanos
 `veterinaria-sedano-frontend` y `peluqueria-canina` (Urban Dogs), adaptada a esta vertical de
 negocio.
 
@@ -27,7 +30,7 @@ negocio.
 - Primary-bg: `#eed694`
 - Highlight: `#8fa4d1` (azul — insignia "Próximamente" y acentos puntuales)
 - Highlight-dark: `#2b3b64` (azul oscuro — fondo de sección, ej. `CompromisoSection`)
-- Accent: `#cc6a24` (naranja — detallitos sueltos: iconos, CTAs de WhatsApp/reserva)
+- Accent: `#cc6a24` (naranja — detallitos sueltos: iconos, CTAs de reserva/llamada)
 - Tipografía: Geist (cuerpo) + Playfair Display (logotipo "calma studio" y titulares, estilo boutique)
 
 > Paleta anterior (marrón café + crudo/beige + dorado suave) guardada como comentario en
@@ -36,7 +39,7 @@ negocio.
 ### Anti-diseño-IA (obligatorio)
 - NO gradientes de 3+ colores
 - NO glassmorphism / neumorfismo
-- Sombras: `shadowOpacity max 0.08`, `blur max 8px` (ver clases `.card`, `.whatsapp-fab` en `globals.css`)
+- Sombras: `shadowOpacity max 0.08`, `blur max 8px` (ver clases `.card`, `.fab-shadow` en `globals.css`)
 - Fondo nunca `#ffffff` puro — usar `var(--background)`
 - Alineación izquierda como base
 - Iconos: **Tabler Icons** (`react-icons/tb`) exclusivamente — no Font Awesome genérico
@@ -54,7 +57,8 @@ como iconos de navegación o UI.
 - React 19 + TypeScript strict
 - Tailwind CSS 4 (tema vía variables CSS en `globals.css` + `@theme inline`)
 - react-icons v5 (Tabler Icons)
-- Sin backend — formulario de reservas y botón flotante vía WhatsApp (`wa.me`)
+- Sin backend propio para el sitio — formulario de reservas deriva a llamada telefónica
+  (`tel:`); el chatbot sí tiene un Route Handler server-side que llama a la API de Groq
 
 ## Datos del negocio
 Extraídos del perfil real de Instagram [@calmastudio71](https://www.instagram.com/calmastudio71):
@@ -66,6 +70,11 @@ Extraídos del perfil real de Instagram [@calmastudio71](https://www.instagram.c
   `src/lib/config.ts`) — no aparecían públicamente en Instagram, sustituir por los reales antes
   de publicar.
 
-## Contacto por WhatsApp
-- `siteConfig.whatsappAssistant` centraliza el texto y el mensaje predefinido del botón flotante (`WhatsAppWidget.tsx`, montado en `layout.tsx`).
-- Es un enlace `wa.me` con mensaje pre-rellenado (vía `buildWhatsAppUrl`), **no** un chatbot ni backend de IA real. No implementar ni sugerir integraciones con WhatsApp Business API/Twilio/LLMs sin que el usuario lo pida explícitamente y confirme el alcance (requiere credenciales e infraestructura nueva).
+## Contacto
+- El estudio no usa WhatsApp actualmente. Todos los CTA de contacto (Footer, `ContactoSection`,
+  `CompromisoSection`, confirmación de `CitasSection`, fallback del chatbot) usan enlaces
+  `tel:${siteConfig.phone}`. No reintroducir `wa.me` ni `buildWhatsAppUrl` sin que el usuario lo
+  pida explícitamente.
+- El chatbot (`ChatWidget.tsx`) sí es un asistente de IA real, vía API de Groq desde el servidor
+  (`src/app/api/chat/route.ts`). Ver `chatbot-notes.md` para arquitectura, guardrails y guía de
+  portabilidad a Drupal/WordPress antes de tocar esa lógica.

@@ -14,15 +14,6 @@ export function formatPhone(phone: string): string {
 }
 
 /**
- * Construye una URL de WhatsApp con mensaje pre-rellenado.
- */
-export function buildWhatsAppUrl(phone: string, message: string): string {
-  const digits = phone.replace(/\D/g, '');
-  const encoded = encodeURIComponent(message);
-  return `https://wa.me/${digits}?text=${encoded}`;
-}
-
-/**
  * Devuelve la fecha mínima aceptable (mañana) en formato YYYY-MM-DD.
  */
 export function getTomorrowDate(): string {

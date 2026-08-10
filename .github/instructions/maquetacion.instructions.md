@@ -24,10 +24,10 @@ los iconos temáticos y, puntualmente, el color de acento de la card.
 2. Hero               (full-screen oscuro, badge + título + CTAs + stats)
 3. CompromisoSection  (banner "por qué elegirnos" + puntos clave + trust chips)
 4. ServiciosSection   (3 cards grandes: Pilates / Barre / Nutrición)
-5. CitasSection       (formulario 2 columnas → WhatsApp)
+5. CitasSection       (formulario 2 columnas → confirmación por llamada telefónica)
 6. ContactoSection    (mapa + tarjetas de contacto)
 7. Footer             (4 columnas)
-8. WhatsAppWidget     (botón flotante, fijo en todas las páginas vía layout.tsx)
+8. ChatWidget         (botón flotante del chatbot, fijo en todas las páginas vía layout.tsx)
 ```
 
 ## Wireframes de Referencia
@@ -69,7 +69,7 @@ los iconos temáticos y, puntualmente, el color de acento de la card.
 ```
 ┌───────────────────────────┬─────────────────────────────┐
 │ ✨ Por qué elegirnos       │  @calmastudio71               │
-│ "Pilates, Barre y.."       │  [🗨 Escríbenos ahora] (bg-accent)│
+│ "Pilates, Barre y.."       │  [📞 Llámanos ahora] (bg-accent)│
 │ párrafo con claim/servicios│                              │
 └───────────────────────────┴─────────────────────────────┘
 ────────────────────── divider ──────────────────────────
@@ -107,23 +107,22 @@ los iconos temáticos y, puntualmente, el color de acento de la card.
 │                    │ └──────────────────┘ │
 │ [ Horario semanal ]│                       │
 └───────────────────┴──────────────────────┘
-       ↓ tras enviar: vista de confirmación con resumen + botón WhatsApp
+       ↓ tras enviar: vista de confirmación con resumen + botón de llamada (tel:)
 ```
 
 ### ContactoSection (2/5 columnas en desktop)
 ```
 ┌─────────────────────────┬───────────────────┐
 │                         │ [📞] Teléfono      │
-│   Mapa (placeholder →   │ [💬] WhatsApp      │
-│   enlace a Google Maps) │ [✉️] Email          │
-│                         │ [📷] Instagram      │
+│   Mapa (placeholder →   │ [✉️] Email          │
+│   enlace a Google Maps) │ [📷] Instagram      │
 │                         │ [🕐] Horario        │
 └─────────────────────────┴───────────────────┘
 ```
 
 ### Footer (4 columnas)
 ```
-[Marca + descripción]  [Servicios: Pilates/Barre/Nutrición]  [Navegación + WhatsApp]  [Contacto: dirección/tel/horario]
+[Marca + descripción]  [Servicios: Pilates/Barre/Nutrición]  [Navegación]  [Contacto: dirección/tel/horario]
 ```
 
 ## Reglas de Consistencia Dura
@@ -134,7 +133,7 @@ los iconos temáticos y, puntualmente, el color de acento de la card.
 4. Botones CTA: **siempre** `rounded-full`.
 5. Section headers: **siempre** el patrón subtítulo → título → divider → descripción, alineado a la izquierda (no centrado).
 6. Alternancia de fondo entre secciones: `bg-background` / `bg-primary-bg` según corresponda (nunca blanco puro).
-7. El botón flotante de WhatsApp (`WhatsAppWidget`) vive en `layout.tsx`, no se duplica dentro de secciones individuales.
+7. El botón flotante del chatbot (`ChatWidget`) vive en `layout.tsx`, no se duplica dentro de secciones individuales.
 
 ## Al Añadir una Nueva Sección
 

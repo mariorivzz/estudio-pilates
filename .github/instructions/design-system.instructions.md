@@ -29,7 +29,7 @@ Definidos en `src/app/globals.css` (`:root`) y expuestos a Tailwind vía `@theme
   --primary-light: #d9a67e;
   --primary-bg: #eed694;
   --secondary: #391212;      /* Texto principal — marrón oscuro, también fondo de Hero/Footer */
-  --accent: #cc6a24;         /* Naranja — detallitos sueltos, CTAs de WhatsApp/reserva */
+  --accent: #cc6a24;         /* Naranja — detallitos sueltos, CTAs de reserva/llamada */
   --accent-light: #f6dab8;
   --highlight: #8fa4d1;      /* Azul — insignia "Próximamente" */
   --highlight-dark: #2b3b64; /* Azul oscuro — fondo de sección, ej. CompromisoSection */
@@ -56,7 +56,7 @@ className="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full fo
 // Secundario (borde)
 className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-full font-semibold transition-colors duration-200"
 
-// WhatsApp / acción de reserva
+// Llamada / acción de reserva
 className="bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-full font-semibold transition-colors duration-200"
 ```
 
@@ -96,7 +96,7 @@ className="card p-6"
 
 Exclusivamente **Tabler Icons** vía `react-icons/tb` para toda funcionalidad (navegación, botones, tarjetas):
 `TbYoga` (Pilates), `TbMusic` (Barre — `TbBallet`/`TbDancers` NO existen en el paquete), `TbApple`/`TbSalad` (Nutrición), `TbUsers`, `TbSparkles`, etc.
-Emojis (🧘🤍) solo como decoración puntual en textos/mensajes de WhatsApp — nunca como icono de UI.
+Emojis (🧘🤍) solo como decoración puntual en textos/mensajes — nunca como icono de UI.
 Antes de usar un icono de Tabler poco habitual, verifica que existe en
 `node_modules/react-icons/tb/index.d.ts` (algunos nombres "intuitivos" no existen en la librería).
 

@@ -66,7 +66,7 @@ export default function AvisoLegalPage() {
         <p>
           Las solicitudes enviadas desde el formulario de reserva{' '}
           <strong>no constituyen una reserva confirmada</strong> hasta que el estudio la confirme
-          expresamente por teléfono o WhatsApp.
+          expresamente por teléfono.
         </p>
       </LegalSection>
 
@@ -82,8 +82,8 @@ export default function AvisoLegalPage() {
         <p>
           {titular} no se responsabiliza de los daños derivados del uso de este sitio ni de la
           indisponibilidad temporal del servicio por causas técnicas. Los enlaces a sitios de
-          terceros (como Instagram, WhatsApp o Google Maps) se ofrecen únicamente como referencia,
-          sin que ello implique control alguno sobre sus contenidos.
+          terceros (como Instagram o Google Maps) se ofrecen únicamente como referencia, sin que
+          ello implique control alguno sobre sus contenidos.
         </p>
       </LegalSection>
 

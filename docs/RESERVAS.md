@@ -4,7 +4,7 @@ Cómo conectar un proveedor de reservas al sitio y cómo probarlo antes de darlo
 
 El código ya está preparado: no hay que programar nada, sólo rellenar tres valores en
 `src/lib/config.ts`. Mientras `booking.enabled` sea `false`, la web sigue funcionando con el
-formulario que deriva a WhatsApp.
+formulario que deriva a llamada telefónica.
 
 ---
 

@@ -1,10 +1,8 @@
 import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/lib/config';
-import { buildWhatsAppUrl } from '@/lib/utils';
 import Link from 'next/link';
 import {
     TbBrandInstagram,
-    TbBrandWhatsapp,
     TbClock,
     TbMapPin,
     TbPhone,
@@ -31,10 +29,6 @@ const serviciosList = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const whatsappUrl = buildWhatsAppUrl(
-    siteConfig.phone,
-    `Hola, me gustaría pedir información sobre las clases de ${siteConfig.businessName}.`
-  );
 
   return (
     <footer className="bg-secondary text-white">
@@ -103,16 +97,6 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-accent hover:text-orange-300 text-sm font-medium transition-colors"
-                >
-                  💬 Escríbenos por WhatsApp →
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -133,17 +117,6 @@ export default function Footer() {
                 >
                   <TbPhone className="text-primary-light shrink-0" size={16} />
                   {siteConfig.phone.replace('+34 ', '')}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm text-white/50 hover:text-primary-light transition-colors"
-                >
-                  <TbBrandWhatsapp className="text-primary-light shrink-0" size={16} />
-                  WhatsApp
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-white/50">

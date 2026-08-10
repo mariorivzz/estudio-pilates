@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     return jsonError('Faltan mensajes en la conversación.', 400);
   }
   if (rawMessages.length > MAX_MESSAGES) {
-    return jsonError('Esta conversación se ha alargado demasiado. Abre un chat nuevo o escríbenos por WhatsApp.', 400);
+    return jsonError('Esta conversación se ha alargado demasiado. Abre un chat nuevo o llámanos por teléfono.', 400);
   }
 
   const history: ChatMessage[] = [];
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
   const rateLimit = checkRateLimit(getClientIp(request));
   if (!rateLimit.allowed) {
     return jsonError(
-      'Has enviado demasiados mensajes seguidos. Espera un momento y vuelve a intentarlo, o escríbenos por WhatsApp.',
+      'Has enviado demasiados mensajes seguidos. Espera un momento y vuelve a intentarlo, o llámanos por teléfono.',
       429,
       { 'Retry-After': String(rateLimit.retryAfterSeconds) }
     );
@@ -72,10 +72,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof GroqConfigError) {
       console.error('[api/chat] Configuración inválida:', error.message);
-      return jsonError('El asistente no está disponible ahora mismo. Escríbenos por WhatsApp.', 503);
+      return jsonError('El asistente no está disponible ahora mismo. Llámanos por teléfono.', 503);
     }
     console.error('[api/chat] Error de red llamando a Groq:', error);
-    return jsonError('No hemos podido conectar con el asistente. Inténtalo de nuevo o escríbenos por WhatsApp.', 502);
+    return jsonError('No hemos podido conectar con el asistente. Inténtalo de nuevo o llámanos por teléfono.', 502);
   }
 
   if (!upstream.ok || !upstream.body) {

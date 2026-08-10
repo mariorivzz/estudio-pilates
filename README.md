@@ -1,8 +1,8 @@
 # Calma Studio — Pilates, Barre & Nutrición (Salamanca)
 
 Sitio web estático (Next.js 16 + Tailwind CSS 4) para **Calma Studio**, el primer centro de
-Barre de Salamanca (Pilates + Barre + Nutrición). Sin backend — el formulario de reservas y el
-botón flotante de WhatsApp redirigen a `wa.me`.
+Barre de Salamanca (Pilates + Barre + Nutrición). Sin backend — el formulario de reservas
+deriva a llamada telefónica (`tel:`).
 
 Basado en la misma arquitectura que
 [`veterinaria-sedano-frontend`](../veterinaria/veterinaria-sedano-frontend) y
@@ -28,7 +28,7 @@ propias de este centro.
 - Next.js 16.2.12 (App Router) + React 19 + TypeScript strict
 - Tailwind CSS 4
 - react-icons v5 (Tabler Icons — `react-icons/tb`)
-- Sin backend — formulario de reservas y botón flotante de WhatsApp
+- Sin backend — formulario de reservas deriva a llamada telefónica
 
 ## Desarrollo
 
@@ -41,7 +41,7 @@ Abre [http://localhost:3000](http://localhost:3000).
 
 Para que el chatbot funcione en local, copia `.env.example` a `.env.local` y añade tu
 `GROQ_API_KEY` (ver [Chatbot](#chatbot-ia)). Sin la clave, el sitio funciona igual pero el
-asistente muestra un aviso y deriva a WhatsApp.
+asistente muestra un aviso y deriva a llamar por teléfono.
 
 ## Estructura
 
@@ -51,11 +51,11 @@ src/
     api/chat/route.ts  # Route Handler del chatbot (llama a Groq, streaming SSE)
     ...                # layout, page, globals.css, error, loading
   components/     # Navbar, Footer, Hero, CompromisoSection, ServiciosSection,
-                  # CitasSection, ContactoSection, WhatsAppWidget, ChatWidget
+                  # CitasSection, ContactoSection, ChatWidget
   lib/
     config.ts     # ⭐ Datos del negocio (editar aquí), SEO, textos del hero
     theme.ts      # Paleta de colores (amarillo mantequilla + marrón + azul + naranja)
-    utils.ts      # Helpers: teléfono, WhatsApp, fechas
+    utils.ts      # Helpers: teléfono, fechas
     chatbot/      # Lógica del chatbot, aislada de React (portable a Drupal/WordPress)
       knowledge.ts     # Base de conocimiento del centro
       systemPrompt.ts  # Prompt + guardrails
@@ -63,26 +63,24 @@ src/
       rateLimit.ts     # Rate limiting en memoria
 ```
 
-Para editar textos, teléfono, horario, dirección o el mensaje del asistente de WhatsApp,
-modifica `src/lib/config.ts`.
+Para editar textos, teléfono, horario o dirección, modifica `src/lib/config.ts`.
 
 ## Chatbot (IA)
 
 Asistente conversacional (Llama 3.3, vía API de Groq) integrado como widget flotante
-(`ChatWidget.tsx`), separado del botón de WhatsApp. Responde dudas sobre servicios, horarios,
-ubicación y reservas usando solo los datos reales de `siteConfig`. Detalles de arquitectura,
-decisiones (incluido el cambio de proveedor de xAI a Groq) y guía de portabilidad a
-Drupal/WordPress en [`chatbot-notes.md`](./chatbot-notes.md).
+(`ChatWidget.tsx`). Responde dudas sobre servicios, horarios, ubicación y reservas usando solo
+los datos reales de `siteConfig`. Detalles de arquitectura, decisiones (incluido el cambio de
+proveedor de xAI a Groq) y guía de portabilidad a Drupal/WordPress en
+[`chatbot-notes.md`](./chatbot-notes.md).
 
 Requiere `GROQ_API_KEY` en variables de entorno (ver `.env.example`) — nunca se expone al
 cliente, solo se usa en `src/app/api/chat/route.ts`.
 
-## Contacto por WhatsApp
+## Contacto
 
-El botón flotante (`WhatsAppWidget`) y el formulario de reservas (`CitasSection`) generan un
-enlace `wa.me` con un mensaje pre-rellenado — no hay backend de IA real detrás. Si en el futuro
-se quiere conectar un asistente de IA de verdad (WhatsApp Business API, Twilio, un LLM, etc.),
-habrá que añadir infraestructura y credenciales nuevas; no está implementado por defecto.
+El estudio aún no usa WhatsApp: el formulario de reservas (`CitasSection`) y todos los CTA de
+contacto del sitio (Footer, Contacto, chatbot) derivan a llamada telefónica (`tel:`), usando
+`siteConfig.phone`. No hay backend de IA ni de mensajería detrás de esos enlaces.
 
 ## Seguridad
 Security headers configurados en `next.config.ts`:

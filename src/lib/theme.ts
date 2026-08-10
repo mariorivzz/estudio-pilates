@@ -25,7 +25,7 @@ export const theme = {
   muted: '#6e4f36',         // Texto secundario
 
   // Colores de apoyo
-  accent: '#cc6a24',        // Naranja — detallitos, CTAs de reserva/WhatsApp
+  accent: '#cc6a24',        // Naranja — detallitos, CTAs de reserva/llamada
   accentLight: '#f6dab8',   // Fondo naranja muy sutil
 
   // Insignias de "Próximamente" / confianza

@@ -31,11 +31,11 @@ export default function PrivacidadPage() {
       <LegalSection heading="Qué datos recogemos y para qué">
         <p>
           Este sitio web <strong>no dispone de servidor propio ni de base de datos</strong>. El
-          formulario de reserva no envía información a ningún sistema nuestro: al pulsar
-          «Solicitar reserva» se abre WhatsApp en tu dispositivo con el mensaje ya redactado, y
-          eres tú quien decide enviarlo.
+          formulario de reserva no envía información a ningún sistema nuestro: los datos que
+          introduces se quedan en tu propio navegador, se muestran en un resumen en pantalla, y
+          eres tú quien decide comunicárnoslos llamando por teléfono para confirmar tu reserva.
         </p>
-        <p>Los datos que nos facilitas por ese canal son:</p>
+        <p>Los datos que nos facilitas por ese canal (la llamada) son:</p>
         <ul className="list-disc pl-5 space-y-1.5">
           <li>Nombre y apellidos.</li>
           <li>Teléfono de contacto.</li>
@@ -69,12 +69,6 @@ export default function PrivacidadPage() {
       </LegalSection>
 
       <LegalSection heading="Destinatarios de los datos">
-        <p>
-          Al enviar el formulario por WhatsApp, la conversación se transmite a través de{' '}
-          <strong>WhatsApp Ireland Limited (grupo Meta)</strong>, que actúa como proveedor del
-          canal de mensajería conforme a sus propias condiciones y política de privacidad. Te
-          recomendamos consultarlas si tienes dudas sobre ese tratamiento.
-        </p>
         {siteConfig.booking.enabled && (
           <p>
             Además, las reservas realizadas desde el calendario integrado en la web se gestionan
@@ -91,9 +85,10 @@ export default function PrivacidadPage() {
 
       <LegalSection heading="Durante cuánto tiempo los conservamos">
         <p>
-          Conservamos la conversación el tiempo necesario para atender tu solicitud y, si acabas
-          siendo clienta, durante la relación con el estudio y los plazos legales de prescripción
-          aplicables (fiscales y contables). Después se eliminan.
+          Conservamos la información que nos facilitas por teléfono el tiempo necesario para
+          atender tu solicitud y, si acabas siendo clienta, durante la relación con el estudio y
+          los plazos legales de prescripción aplicables (fiscales y contables). Después se
+          eliminan.
         </p>
       </LegalSection>
 

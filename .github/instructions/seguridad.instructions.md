@@ -48,13 +48,14 @@ añadir su dominio explícitamente en vez de ampliar `'unsafe-inline'` a orígen
 ## 2. Validación de Inputs (`CitasSection`)
 
 El único formulario del sitio es el de reservas — sus datos **nunca** se envían a un servidor,
-solo se usan para construir un mensaje de WhatsApp (`buildWhatsAppUrl`). Aun así, validar:
+solo se muestran en un resumen en pantalla para que la persona los use al llamar por teléfono.
+Aun así, validar:
 
 ```typescript
 // Teléfono español
 const telefonoValido = /^[679]\d{8}$/.test(telefono);
 
-// Longitud de nombre / notas para evitar mensajes de WhatsApp absurdamente largos
+// Longitud de nombre / notas razonable
 const nombreValido = nombre.trim().length >= 2 && nombre.length <= 100;
 ```
 
@@ -70,20 +71,23 @@ Además de la validación en JS, los `<input>`/`<textarea>` del formulario lleva
 ## 4. Enlaces Externos
 
 ```tsx
-// SIEMPRE rel="noopener noreferrer" en enlaces target="_blank" (Instagram, Facebook, Maps, WhatsApp)
+// SIEMPRE rel="noopener noreferrer" en enlaces target="_blank" (Instagram, Facebook, Maps)
 <a href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer">...</a>
 ```
 
 ## 5. No Inventar Infraestructura
 
-No añadir WhatsApp Business API, Twilio, backends de IA, bases de datos ni autenticación
-sin que el usuario lo pida explícitamente — este sitio es intencionalmente estático.
+No añadir WhatsApp Business API, Twilio, bases de datos ni autenticación sin que el usuario
+lo pida explícitamente — este sitio es intencionalmente estático salvo por el Route Handler
+del chatbot (`src/app/api/chat`, ver `chatbot-notes.md`), que ya existe y no debe ampliarse
+(nuevos endpoints, nuevas integraciones) sin confirmación explícita.
 
 ## Checklist Pre-Deploy
 
 - [ ] `next.config.ts` conserva todos los headers de seguridad.
-- [ ] El formulario de reservas valida teléfono/nombre antes de construir la URL de WhatsApp.
+- [ ] El formulario de reservas valida teléfono/nombre antes de mostrar el resumen de confirmación.
 - [ ] Todos los enlaces `target="_blank"` llevan `rel="noopener noreferrer"`.
-- [ ] No hay secrets ni claves de API en el repo (no debería haber ninguna — sitio estático).
+- [ ] No hay secrets ni claves de API commiteadas en el repo — `GROQ_API_KEY` solo en
+      `.env.local` (gitignorado) y en las variables de entorno de Vercel.
 - [ ] Los datos de `src/lib/config.ts` marcados `// EDITAR` se han sustituido por los reales del negocio.
 - [ ] `npm audit` revisado; vulnerabilidades solo aceptadas si son internas de Next.js vendored deps sin fix disponible sin downgrade.

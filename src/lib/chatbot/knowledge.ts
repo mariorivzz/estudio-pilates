@@ -64,6 +64,6 @@ export function getChatbotKnowledge(): ChatbotKnowledge {
     instagramUrl: siteConfig.instagramUrl,
     hours: siteConfig.hours,
     bookingPolicy:
-      'Las reservas se gestionan a través del formulario de la web (sección "Reserva tu clase") o por WhatsApp/teléfono. El estudio confirma la plaza el mismo día. El asistente no puede confirmar reservas directamente.',
+      'Las reservas se gestionan a través del formulario de la web (sección "Reserva tu clase") o llamando por teléfono. El estudio confirma la plaza el mismo día. El asistente no puede confirmar reservas directamente.',
   };
 }

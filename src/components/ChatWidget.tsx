@@ -1,9 +1,8 @@
 'use client';
 
 import { siteConfig } from '@/lib/config';
-import { buildWhatsAppUrl } from '@/lib/utils';
 import { useEffect, useRef, useState } from 'react';
-import { TbBrandWhatsapp, TbMessageChatbot, TbRefresh, TbSend2, TbX } from 'react-icons/tb';
+import { TbMessageChatbot, TbPhoneCall, TbRefresh, TbSend2, TbX } from 'react-icons/tb';
 
 interface DisplayMessage {
   role: 'user' | 'assistant';
@@ -31,10 +30,7 @@ export default function ChatWidget() {
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const whatsappFallbackUrl = buildWhatsAppUrl(
-    siteConfig.phone,
-    'Hola, tengo una duda para Calma Studio.'
-  );
+  const phoneCallUrl = `tel:${siteConfig.phone}`;
 
   useEffect(() => {
     if (isOpen) {
@@ -158,9 +154,9 @@ export default function ChatWidget() {
         {liveAnnouncement}
       </div>
 
-      {/* Botón flotante — apilado sobre el de WhatsApp (abajo-derecha). Abajo-izquierda
-          choca con los CTA del Hero ("Reserva tu clase" / Instagram) en viewports bajos,
-          ya que el Hero centra su contenido verticalmente. */}
+      {/* Botón flotante — abajo-derecha. Abajo-izquierda choca con los CTA del Hero
+          ("Reserva tu clase" / Instagram) en viewports bajos, ya que el Hero centra
+          su contenido verticalmente. */}
       <button
         ref={triggerRef}
         type="button"
@@ -169,7 +165,7 @@ export default function ChatWidget() {
         aria-controls="chat-widget-panel"
         aria-haspopup="dialog"
         aria-label={isOpen ? 'Cerrar asistente de Calma Studio' : 'Abrir asistente de Calma Studio'}
-        className="fixed bottom-24 right-5 sm:bottom-28 sm:right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-primary hover:bg-primary-dark text-white transition-colors whatsapp-fab"
+        className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-primary hover:bg-primary-dark text-white transition-colors fab-shadow"
       >
         {isOpen ? <TbX size={26} /> : <TbMessageChatbot size={26} />}
       </button>
@@ -179,7 +175,7 @@ export default function ChatWidget() {
           id="chat-widget-panel"
           role="dialog"
           aria-labelledby="chat-widget-title"
-          className="fixed z-50 bottom-40 left-5 right-5 sm:left-auto sm:right-6 sm:bottom-44 sm:w-96 max-h-[min(32rem,calc(100vh-11rem))] flex flex-col bg-card-bg border border-border rounded-2xl shadow-lg overflow-hidden animate-fade-in-up"
+          className="fixed z-50 bottom-[4.75rem] left-5 right-5 sm:left-auto sm:right-6 sm:bottom-24 sm:w-96 max-h-[min(32rem,calc(100vh-8rem))] flex flex-col bg-card-bg border border-border rounded-2xl shadow-lg overflow-hidden animate-fade-in-up"
         >
           {/* Cabecera */}
           <div className="flex items-center justify-between gap-2 bg-primary text-white px-4 py-3.5 shrink-0">
@@ -254,13 +250,11 @@ export default function ChatWidget() {
                 <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-accent-light text-secondary text-sm leading-relaxed px-3.5 py-2.5">
                   <p>{errorMessage}</p>
                   <a
-                    href={whatsappFallbackUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={phoneCallUrl}
                     className="inline-flex items-center gap-1.5 mt-2 font-semibold text-accent hover:text-primary transition-colors"
                   >
-                    <TbBrandWhatsapp size={16} />
-                    Escríbenos por WhatsApp
+                    <TbPhoneCall size={16} />
+                    Llámanos
                   </a>
                 </div>
               </div>
@@ -306,7 +300,7 @@ export default function ChatWidget() {
               <a href="#citas" onClick={() => setIsOpen(false)} className="underline hover:text-primary">
                 formulario
               </a>{' '}
-              o escríbenos por WhatsApp.
+              o llámanos.
             </p>
           </form>
         </div>
