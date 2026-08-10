@@ -177,9 +177,15 @@ existente).
 
 ### 8. Ubicación del widget
 
-Botón flotante abajo-izquierda, separado del botón de WhatsApp (abajo-derecha) para que no
-compitan por el mismo rincón de la pantalla. Colapsado por defecto — visible pero no
-intrusivo, sin apertura automática ni mensajes proactivos.
+Botón flotante apilado sobre el de WhatsApp, ambos en la esquina inferior derecha.
+Colapsado por defecto — visible pero no intrusivo, sin apertura automática ni mensajes
+proactivos.
+
+Se probó primero abajo-izquierda (para separarlo del WhatsApp) pero el `Hero` centra su
+contenido verticalmente (`min-h-screen flex items-center`) y sus CTA ("Reserva tu clase" /
+Instagram) son lo bastante bajos como para chocar visualmente con esa esquina en viewports
+de poca altura. Apilar ambos botones en la esquina derecha (patrón habitual de varios FABs
+en la misma esquina) los aleja del contenido del Hero, que vive en la mitad izquierda.
 
 ## Qué falta antes de publicar
 
