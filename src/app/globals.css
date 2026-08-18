@@ -139,6 +139,30 @@ html {
   box-shadow: 0 2px 8px rgba(38, 37, 33, 0.08);
 }
 
+/* ── Feed de Instagram: respeta "reducir movimiento" ───────── */
+/* Quien tenga activada esa preferencia del sistema ve el feed quieto: sin
+   pulso del esqueleto ni zoom al pasar por encima. */
+@media (prefers-reduced-motion: reduce) {
+  .ig-section *,
+  .ig-section *::before,
+  .ig-section *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Carril deslizable sin barra de scroll (feed de Instagram) ── */
+/* La barra se oculta solo visualmente: el carril sigue siendo enfocable y se
+   recorre con el dedo, la rueda, las flechas del teclado y sus dos botones. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* ── Chatbot: indicador de "escribiendo…" ──────────────────── */
 /* Pulso de opacidad, coherente con las animaciones sutiles del resto del
    sitio — sin bounce ni efectos llamativos. */

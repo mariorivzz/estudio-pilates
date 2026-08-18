@@ -2,8 +2,12 @@ import CitasSection from '@/components/CitasSection';
 import CompromisoSection from '@/components/CompromisoSection';
 import ContactoSection from '@/components/ContactoSection';
 import Hero from '@/components/Hero';
+import InstagramSection from '@/components/InstagramSection';
+import InstagramSkeleton from '@/components/instagram/InstagramSkeleton';
 import ServiciosSection from '@/components/ServiciosSection';
 import { siteConfig } from '@/lib/config';
+import { SHOW_INSTAGRAM_FEED } from '@/lib/instagram';
+import { Suspense } from 'react';
 
 // Schema.org JSON-LD para SEO local
 const jsonLd = {
@@ -42,6 +46,16 @@ export default function HomePage() {
       <CompromisoSection />
       <ServiciosSection />
       <CitasSection />
+
+      {/* Feed de Instagram (Behold) — sección de prueba, ver src/lib/instagram.ts.
+          Se apaga con SHOW_INSTAGRAM_FEED=false; el <Suspense> evita que espere
+          al feed para pintar el resto de la página. */}
+      {SHOW_INSTAGRAM_FEED && (
+        <Suspense fallback={<InstagramSkeleton />}>
+          <InstagramSection />
+        </Suspense>
+      )}
+
       <ContactoSection />
     </>
   );

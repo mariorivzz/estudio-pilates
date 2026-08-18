@@ -21,7 +21,7 @@ const cspHeader = `
   default-src 'self';
   script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
   style-src 'self' 'unsafe-inline';
-  img-src 'self' data: https://images.unsplash.com;
+  img-src 'self' data: https://images.unsplash.com https://behold.pictures https://cdn.behold.pictures;
   font-src 'self' data:;
   connect-src 'self';
   object-src 'none';
@@ -69,7 +69,16 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
     // Foto de portada del Hero (Unsplash, licencia libre) — https://unsplash.com/@roxanarxx
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
+    // y las fotos de ejemplo del feed de Instagram mientras no haya cuenta de Behold.
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      // CDN de Behold para el feed de Instagram (ver src/lib/instagram.ts). Se
+      // deja `search` abierto porque Behold añade el tamaño como query string
+      // (?class=originalMedium); el resto de la URL es un token firmado que solo
+      // sirve para las fotos de esta cuenta.
+      { protocol: "https", hostname: "behold.pictures", pathname: "/**" },
+      { protocol: "https", hostname: "cdn.behold.pictures", pathname: "/**" },
+    ],
     qualities: [75, 90],
   },
   async headers() {

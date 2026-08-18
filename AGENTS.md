@@ -59,6 +59,7 @@ como iconos de navegación o UI.
 - react-icons v5 (Tabler Icons)
 - Sin backend propio para el sitio — formulario de reservas deriva a llamada telefónica
   (`tel:`); el chatbot sí tiene un Route Handler server-side que llama a la API de Groq
+- `@behold/types` (devDependency) — tipos del feed de Instagram (ver más abajo)
 
 ## Datos del negocio
 Extraídos del perfil real de Instagram [@calmastudio71](https://www.instagram.com/calmastudio71):
@@ -78,3 +79,12 @@ Extraídos del perfil real de Instagram [@calmastudio71](https://www.instagram.c
 - El chatbot (`ChatWidget.tsx`) sí es un asistente de IA real, vía API de Groq desde el servidor
   (`src/app/api/chat/route.ts`). Ver `chatbot-notes.md` para arquitectura, guardrails y guía de
   portabilidad a Drupal/WordPress antes de tocar esa lógica.
+
+## Feed de Instagram (en pruebas)
+`InstagramSection.tsx` + `src/components/instagram/` muestran las últimas publicaciones de
+@calmastudio71 leyendo el JSON feed de Behold desde el servidor (`src/lib/instagram.ts`, ISR
+6 h). Es un **prototipo pendiente de validar visualmente**: va deliberadamente después de
+`CitasSection` y su CTA es secundario (botón de contorno) para no competir con «Reserva tu
+clase». Se apaga entero con `SHOW_INSTAGRAM_FEED=false` y tiene tres maquetaciones
+(`INSTAGRAM_FEED_VARIANT`: `grid` | `carousel` | `moodboard`). Ver `docs/INSTAGRAM.md` antes de
+tocarlo.
