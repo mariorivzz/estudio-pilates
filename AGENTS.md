@@ -22,10 +22,10 @@ negocio.
 ## Diseño — Reglas Obligatorias
 
 ### Paleta de colores
-- Background: `#f2edbd` (amarillo mantequilla — nunca blanco puro)
-- Secondary (texto principal): `#391212` (marrón oscuro — también fondo de secciones oscuras como Hero/Footer)
-- Primary: `#74342b` (marrón — branding, botones, headings)
-- Primary-dark: `#4a231c` (hover states / cards oscuras)
+- Background: `#fff8e1` (crema claro — nunca blanco puro)
+- Secondary (texto principal): `#3b2b23` (mismo valor que Primary — titulares y fondos oscuros: cards de servicios, Footer)
+- Primary: `#3b2b23` (marrón oscuro — color unificado: branding, botones, headings, chatbot)
+- Primary-dark: `#291e18` (**solo** hover de botones y enlaces — no usar como fondo)
 - Primary-light: `#d9a67e`
 - Primary-bg: `#eed694`
 - Highlight: `#8fa4d1` (azul — insignia "Próximamente" y acentos puntuales)

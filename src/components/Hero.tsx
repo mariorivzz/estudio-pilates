@@ -21,7 +21,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 opacity-[0.05]"
         style={{
-          backgroundImage: 'radial-gradient(circle, #74342b 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, #3b2b23 1px, transparent 1px)',
           backgroundSize: '32px 32px',
         }}
       />

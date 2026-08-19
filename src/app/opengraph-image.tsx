@@ -16,7 +16,7 @@ export default function OpengraphImage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          background: '#391212',
+          background: '#3b2b23',
           padding: '0 90px',
         }}
       >
@@ -39,7 +39,7 @@ export default function OpengraphImage() {
             alignItems: 'center',
             gap: 10,
             background: '#8fa4d1',
-            color: '#391212',
+            color: '#3b2b23',
             fontSize: 22,
             fontWeight: 700,
             padding: '10px 24px',

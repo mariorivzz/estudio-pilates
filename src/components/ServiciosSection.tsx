@@ -56,7 +56,7 @@ export default function ServiciosSection() {
           {servicios.map((servicio, index) => (
             <ScrollReveal
               key={servicio.titulo}
-              className="relative flex flex-col aspect-[4/5] rounded-2xl overflow-hidden bg-primary-dark p-7"
+              className="relative flex flex-col aspect-[4/5] rounded-2xl overflow-hidden bg-secondary p-7"
               delay={((index + 1) * 100) as 100 | 200 | 300}
             >
               {/* Textura sutil, coherente con el Hero */}

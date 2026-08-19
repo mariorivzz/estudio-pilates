@@ -15,13 +15,13 @@
 
 export const theme = {
   // Colores principales
-  primary: '#74342b',       // Marrón principal
-  primaryDark: '#4a231c',   // Hover states / cards oscuras
+  primary: '#3b2b23',       // Marrón oscuro — color principal unificado
+  primaryDark: '#291e18',   // Solo hover de botones y enlaces
   primaryLight: '#d9a67e',  // Texto/iconos claros sobre fondo oscuro
   primaryBg: '#eed694',     // Fondo suave marrón-mantequilla para secciones
 
   // Texto
-  secondary: '#391212',     // Marrón oscuro — cuerpo de texto y fondos oscuros (Hero, Footer)
+  secondary: '#3b2b23',     // Mismo valor que primary — titulares y fondos oscuros (cards, Footer)
   muted: '#6e4f36',         // Texto secundario
 
   // Colores de apoyo
@@ -34,12 +34,12 @@ export const theme = {
   highlightBg: '#e6ecf8',
 
   // Estructura
-  background: '#f2edbd',    // Fondo principal — amarillo mantequilla
+  background: '#fff8e1',    // Fondo principal — crema claro
   cardBg: '#ffffff',
   border: '#e0c179',
 
   // Overlay para hero
-  heroOverlay: 'rgba(57, 18, 18, 0.84)',
+  heroOverlay: 'rgba(59, 43, 35, 0.84)',
 } as const;
 
 export type Theme = typeof theme;
