@@ -92,7 +92,7 @@ Security headers configurados en `next.config.ts`:
 
 ## Diseño
 Paleta inspirada en la identidad real de Calma Studio (NO lavanda/spa genérico de IA):
-- **Background:** `#f6e4ac` (amarillo mantequilla)
+- **Background:** `#f2edbd` (amarillo mantequilla)
 - **Secondary (texto):** `#391212` (marrón oscuro)
 - **Primary:** `#74342b` (marrón)
 - **Highlight:** `#8fa4d1` (azul — insignias de "Próximamente")

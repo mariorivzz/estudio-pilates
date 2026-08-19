@@ -34,7 +34,7 @@ export const theme = {
   highlightBg: '#e6ecf8',
 
   // Estructura
-  background: '#f6e4ac',    // Fondo principal — amarillo mantequilla
+  background: '#f2edbd',    // Fondo principal — amarillo mantequilla
   cardBg: '#ffffff',
   border: '#e0c179',
 

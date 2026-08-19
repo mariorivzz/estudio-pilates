@@ -22,7 +22,7 @@ negocio.
 ## Diseño — Reglas Obligatorias
 
 ### Paleta de colores
-- Background: `#f6e4ac` (amarillo mantequilla — nunca blanco puro)
+- Background: `#f2edbd` (amarillo mantequilla — nunca blanco puro)
 - Secondary (texto principal): `#391212` (marrón oscuro — también fondo de secciones oscuras como Hero/Footer)
 - Primary: `#74342b` (marrón — branding, botones, headings)
 - Primary-dark: `#4a231c` (hover states / cards oscuras)
