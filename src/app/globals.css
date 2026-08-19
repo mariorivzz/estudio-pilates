@@ -9,18 +9,18 @@
    --background: #f7f0e3; --foreground: #241a12; --card-bg: #ffffff;
    --border: #e6d9c4; --muted: #7a6a58; */
 :root {
-  --primary: #3b2b23;
+  --primary: #4c3a2f;
   --primary-dark: #291e18;
   --primary-light: #d9a67e;
   --primary-bg: #eed694;
-  --secondary: #3b2b23;
+  --secondary: #4c3a2f;
   --accent: #cc6a24;
   --accent-light: #f6dab8;
   --highlight: #8fa4d1;
   --highlight-dark: #2b3b64;
   --highlight-bg: #e6ecf8;
   --background: #fff8e1;
-  --foreground: #3b2b23;
+  --foreground: #4c3a2f;
   --card-bg: #ffffff;
   --border: #e0c179;
   --muted: #6e4f36;
