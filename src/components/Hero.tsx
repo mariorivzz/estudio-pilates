@@ -1,11 +1,20 @@
 import { siteConfig } from '@/lib/config';
-// import Image from 'next/image';
-import { TbArrowRight, TbBrandInstagram, TbMusic, TbYoga } from 'react-icons/tb';
+import Image from 'next/image';
+import { TbArrowRight, TbBrandInstagram, TbYoga } from 'react-icons/tb';
 
 // Foto de fondo (Unsplash, licencia libre, de https://unsplash.com/@roxanarxx) —
 // descomentar junto con el bloque <Image> de abajo para reactivarla.
 // const HERO_IMAGE =
 //   'https://images.unsplash.com/photo-1747239685045-fcbcf98985db?q=90&w=2600&auto=format&fit=crop';
+
+// Foto a sangre de la mitad derecha. Es la misma imagen que abre el feed de
+// Instagram (`mock-1` en src/lib/instagram.ts), para que Hero y feed compartan
+// estética. Se pide a Unsplash recortada a 1920x2160 (ratio 0.889) porque esa es
+// la proporción real del panel: media pantalla de ancho por el alto del Hero
+// —0.88 a 1280x800, 0.95 a 1920x1080—. Al coincidir de origen, `object-cover`
+// apenas tiene que recortar, y los 1920 px de ancho cubren pantallas 2x.
+const HERO_PHOTO =
+  'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=90&w=1920&h=2160&fit=crop&auto=format';
 
 export default function Hero() {
   return (
@@ -26,15 +35,27 @@ export default function Hero() {
         }}
       />
 
-      {/* Acento café sutil en esquina superior derecha */}
+      {/* Acento café sutil en esquina superior derecha — desde xl queda tapado
+          por la foto, pero sigue marcando la mitad derecha en pantallas menores. */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-primary opacity-[0.07]" />
 
-      {/* Icono decorativo — no centrado, fuera de pantalla en móvil */}
-      <div className="absolute bottom-12 right-8 opacity-[0.07] hidden lg:block">
-        <TbYoga className="text-primary" size={280} strokeWidth={0.8} />
+      {/* Foto a sangre: mitad derecha completa, del navbar al final de la sección.
+          Solo desde xl (1280px); por debajo el titular necesita el ancho entero.
+          Sin `priority` a propósito: el elemento LCP es el titular. */}
+      <div className="animate-fade-in absolute top-[72px] bottom-0 right-0 w-1/2 hidden xl:block">
+        <Image
+          src={HERO_PHOTO}
+          alt="Grupo reducido haciendo Pilates sobre esterillas en una sala luminosa"
+          fill
+          quality={90}
+          sizes="50vw"
+          className="object-cover"
+        />
       </div>
-      <div className="absolute top-24 right-1/4 opacity-[0.08] hidden xl:block">
-        <TbMusic className="text-accent" size={140} strokeWidth={0.8} />
+
+      {/* Icono decorativo — no centrado, fuera de pantalla en móvil */}
+      <div className="absolute bottom-12 right-8 opacity-[0.07] hidden lg:block xl:hidden">
+        <TbYoga className="text-primary" size={280} strokeWidth={0.8} />
       </div>
 
       {/* Foto de fondo a pantalla completa — comentada, ver HERO_IMAGE arriba para reactivarla
@@ -53,7 +74,7 @@ export default function Hero() {
 
       {/* Contenido */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20 w-full">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl xl:max-w-none xl:w-1/2 xl:pr-12">
           {/* Confianza */}
           <div className="animate-fade-in delay-100 flex items-center gap-2 mb-6">
             <span className="text-secondary/60 text-sm">
@@ -95,7 +116,7 @@ export default function Hero() {
           </div>
 
           {/* Stats */}
-          <div className="animate-fade-in-up delay-400 mt-16 flex flex-wrap gap-12">
+          <div className="animate-fade-in-up delay-400 mt-16 flex flex-wrap gap-12 xl:grid xl:grid-cols-3 xl:gap-6">
             {siteConfig.hero.stats.map((stat) => (
               <div key={stat.label}>
                 <p className="text-3xl sm:text-4xl font-bold text-primary">{stat.value}</p>
