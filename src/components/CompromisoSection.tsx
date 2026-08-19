@@ -41,7 +41,7 @@ export default function CompromisoSection() {
               <span className="text-highlight text-xs font-bold uppercase tracking-widest">
                 Por qué elegirnos
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mt-1.5 mb-3 leading-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-white mt-1.5 mb-3 leading-tight">
                 Pilates, Barre y Nutrición en un mismo lugar en {siteConfig.city}
               </h2>
               <p className="text-white/60 text-base leading-relaxed max-w-lg">

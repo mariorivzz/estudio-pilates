@@ -110,7 +110,7 @@ export default function CitasSection() {
             <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <TbCheck className="text-primary" size={36} />
             </div>
-            <h3 className="text-3xl font-bold text-secondary mb-3">¡Solicitud lista!</h3>
+            <h3 className="text-3xl font-semibold text-secondary mb-3">¡Solicitud lista!</h3>
             <p className="text-muted text-lg mb-8">
               Llámanos al <strong className="text-secondary">{siteConfig.phone.replace('+34 ', '')}</strong>{' '}
               y coméntanos estos datos para confirmar tu reserva.
@@ -156,7 +156,7 @@ export default function CitasSection() {
             <span className="text-primary font-semibold text-sm uppercase tracking-wider">
               Reserva online
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-secondary mt-3 mb-4 leading-tight">
+            <h2 className="text-4xl sm:text-5xl font-semibold text-secondary mt-3 mb-4 leading-tight">
               Reserva tu clase
             </h2>
             <div className="section-divider-left mb-6" />
@@ -363,7 +363,7 @@ export default function CitasSection() {
                 </div>
                 {/* Evita recoger datos de salud (art. 9 RGPD) por un canal no cifrado
                     extremo a extremo bajo nuestro control — se preguntan en el estudio. */}
-                <p className="text-muted text-xs mt-1.5">
+                <p className="text-muted text-xs leading-relaxed mt-1.5">
                   No incluyas datos de salud (lesiones, embarazo, patologías). Los valoraremos
                   contigo en el estudio antes de tu primera clase.
                 </p>
@@ -405,7 +405,7 @@ export default function CitasSection() {
                 <TbArrowRight size={18} />
               </button>
 
-              <p className="text-center text-xs text-muted">
+              <p className="text-center text-xs leading-relaxed text-muted">
                 Al enviar verás un resumen para confirmar tu reserva por teléfono: tus datos no
                 se envían a ningún servidor.
               </p>

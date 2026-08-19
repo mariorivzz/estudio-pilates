@@ -62,7 +62,7 @@ export default function Hero() {
           </div>
 
           {/* Titular */}
-          <h1 className="animate-fade-in-up delay-100 font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-secondary leading-[1.08] mb-6">
+          <h1 className="animate-fade-in-up delay-100 font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-secondary leading-[1.08] mb-6">
             {siteConfig.hero.title}{' '}
             <span className="text-secondary">{siteConfig.hero.titleHighlight}</span>
             <br />

@@ -31,7 +31,12 @@ negocio.
 - Highlight: `#8fa4d1` (azul — insignia "Próximamente" y acentos puntuales)
 - Highlight-dark: `#2b3b64` (azul oscuro — fondo de sección, ej. `CompromisoSection`)
 - Accent: `#cc6a24` (naranja — detallitos sueltos: iconos, CTAs de reserva/llamada)
-- Tipografía: Geist (cuerpo) + Playfair Display (logotipo "calma studio" y titulares, estilo boutique)
+- Tipografía: **Poppins** (cuerpo, navegación, botones y formularios — pesos 400/500/600/700) +
+  **Fraunces** (titulares h1–h3 y elementos de marca como el logotipo "calma studio" — rango 500–600,
+  600 por defecto y 500 en los titulares más finos). Ambas vía `next/font/google` en `layout.tsx`,
+  auto-alojadas. Utilidades Tailwind: `font-heading` / `font-serif` para titulares, `font-body` /
+  `font-sans` para el resto. Los `h1/h2/h3` ya reciben Fraunces desde `globals.css`, sin necesidad
+  de añadir `font-serif` en el markup.
 
 > Paleta anterior (marrón café + crudo/beige + dorado suave) guardada como comentario en
 > `src/lib/theme.ts` y `src/app/globals.css`, y disponible en el historial de git.

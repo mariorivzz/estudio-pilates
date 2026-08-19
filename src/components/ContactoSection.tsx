@@ -11,7 +11,7 @@ export default function ContactoSection() {
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">
             Dónde estamos
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-secondary mt-3 mb-4 leading-tight">
+          <h2 className="font-serif text-4xl sm:text-5xl font-semibold text-secondary mt-3 mb-4 leading-tight">
             Visítanos en {siteConfig.city}
           </h2>
           <div className="section-divider-left mb-5" />

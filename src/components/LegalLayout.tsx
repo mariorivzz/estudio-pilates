@@ -32,7 +32,7 @@ export default function LegalLayout({ title, updatedAt, children }: LegalLayoutP
           Volver al inicio
         </Link>
 
-        <h1 className="font-serif text-4xl sm:text-5xl font-bold text-secondary leading-tight">
+        <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-secondary leading-tight">
           {title}
         </h1>
         <div className="section-divider-left mt-5 mb-4" />
@@ -68,7 +68,7 @@ export function LegalSection({
 }) {
   return (
     <div>
-      <h2 className="font-serif text-2xl font-bold text-secondary mb-3">{heading}</h2>
+      <h2 className="font-serif text-2xl font-semibold text-secondary mb-3">{heading}</h2>
       <div className="space-y-3 text-muted leading-relaxed [&_a]:text-primary [&_a]:underline hover:[&_a]:text-primary-dark [&_strong]:text-secondary">
         {children}
       </div>

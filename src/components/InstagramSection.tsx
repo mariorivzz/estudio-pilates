@@ -42,7 +42,7 @@ export default async function InstagramSection() {
           </span>
           <h2
             id="instagram-titulo"
-            className="mt-3 mb-4 font-serif text-4xl font-bold leading-tight text-secondary sm:text-5xl"
+            className="mt-3 mb-4 font-serif text-4xl font-semibold leading-tight text-secondary sm:text-5xl"
           >
             El estudio, por dentro
           </h2>

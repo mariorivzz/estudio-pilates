@@ -27,7 +27,7 @@ export default function Navbar() {
                 <TbYoga className="text-white" size={20} />
               </div>
               <div className="leading-tight">
-                <span className="font-serif text-secondary font-bold text-lg tracking-tight block lowercase">
+                <span className="font-serif text-secondary font-semibold text-lg tracking-tight block lowercase">
                   calma <span className="text-primary">studio</span>
                 </span>
                 <span className="text-muted text-xs">{siteConfig.city}</span>

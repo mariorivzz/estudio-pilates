@@ -43,15 +43,30 @@
   --color-card-bg: var(--card-bg);
   --color-border: var(--border);
   --color-muted: var(--muted);
-  --font-sans: var(--font-montserrat);
-  --font-serif: var(--font-playfair);
+  /* Tipografía — pilas con respaldo del sistema para evitar saltos de
+     maquetación mientras carga la fuente. next/font añade además una fuente
+     de respaldo ajustada en métricas (adjustFontFallback, activo por defecto). */
+  --font-heading: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-poppins), system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Alias heredados: `font-serif` y `font-sans` siguen funcionando en el markup. */
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-poppins), system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 /* ── Base ────────────────────────────────────────────────── */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-poppins), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Titulares: Fraunces en todo h1/h2/h3, lleven o no la clase `font-serif` en el
+   markup (varios h2 no la llevaban y se renderizaban con la fuente de cuerpo).
+   No se fija font-weight aquí a propósito: cada titular conserva el suyo. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
 }
 
 html {

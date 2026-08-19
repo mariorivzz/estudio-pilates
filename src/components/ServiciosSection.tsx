@@ -42,7 +42,7 @@ export default function ServiciosSection() {
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">
             Nuestros servicios
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-secondary mt-3 mb-4 leading-tight">
+          <h2 className="font-serif text-4xl sm:text-5xl font-semibold text-secondary mt-3 mb-4 leading-tight">
             Pilates, Barre y Nutrición para cada nivel
           </h2>
           <div className="section-divider-left mb-5" />
@@ -77,7 +77,7 @@ export default function ServiciosSection() {
               </div>
 
               {/* Título editorial — protagonista, como en los posts */}
-              <h3 className="relative font-serif text-white text-6xl sm:text-7xl leading-[0.92] mb-2">
+              <h3 className="relative font-serif font-medium text-white text-6xl sm:text-7xl leading-[0.92] mb-2">
                 {servicio.titulo}
               </h3>
               <p className="relative text-white/60 text-xs leading-snug max-w-[28ch] mb-4">
@@ -100,7 +100,7 @@ export default function ServiciosSection() {
               </ul>
 
               {/* Firma — tono del logotipo, como en las publicaciones */}
-              <span className="relative text-center font-serif text-primary-light/90 text-base lowercase tracking-wide">
+              <span className="relative text-center font-serif font-medium text-primary-light/90 text-base lowercase tracking-wide">
                 calma <span className="text-white/90">studio</span>
               </span>
             </ScrollReveal>

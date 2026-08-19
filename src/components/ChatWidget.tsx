@@ -180,7 +180,7 @@ export default function ChatWidget() {
           {/* Cabecera */}
           <div className="flex items-center justify-between gap-2 bg-primary text-white px-4 py-3.5 shrink-0">
             <div className="min-w-0">
-              <h2 id="chat-widget-title" className="font-serif text-base font-bold leading-tight truncate">
+              <h2 id="chat-widget-title" className="font-serif text-base font-semibold leading-tight truncate">
                 Asistente de calma studio
               </h2>
               <p className="text-white/70 text-xs">Pilates · Barre · Nutrición</p>
@@ -261,7 +261,7 @@ export default function ChatWidget() {
             )}
 
             {historyFull && (
-              <p className="text-center text-xs text-muted">
+              <p className="text-center text-xs leading-relaxed text-muted">
                 Esta conversación se ha alargado bastante — pulsa{' '}
                 <TbRefresh size={12} className="inline" /> para empezar una nueva.
               </p>

@@ -97,5 +97,5 @@ Paleta inspirada en la identidad real de Calma Studio (NO lavanda/spa genérico 
 - **Primary:** `#3b2b23` (marrón oscuro — unificado)
 - **Highlight:** `#8fa4d1` (azul — insignias de "Próximamente")
 - **Accent:** `#cc6a24` (naranja — detallitos sueltos)
-- Tipografía: Geist (cuerpo) + Playfair Display (logotipo y titulares, estilo boutique)
+- Tipografía: **Poppins** (cuerpo, 400/500/600/700) + **Fraunces** (titulares y logotipo, 500–600), vía `next/font/google`
 - Iconos: Tabler Icons (modernos, no típicos)

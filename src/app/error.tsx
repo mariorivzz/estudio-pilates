@@ -11,7 +11,7 @@ export default function Error({
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="text-center max-w-md">
         <span className="text-6xl block mb-6">🧘</span>
-        <h2 className="text-2xl font-bold text-secondary mb-3">
+        <h2 className="text-2xl font-semibold text-secondary mb-3">
           Algo salió mal
         </h2>
         <p className="text-muted mb-8">

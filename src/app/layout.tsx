@@ -3,20 +3,30 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { siteConfig } from "@/lib/config";
 import type { Metadata } from "next";
-import { Montserrat, Playfair_Display } from "next/font/google";
+import { Fraunces, Poppins } from "next/font/google";
 import "./globals.css";
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+// Titulares y elementos de marca. Fraunces va de 100 a 900; pedimos solo las dos
+// instancias que usamos —600 para titulares y 500 para los más finos— en lugar de
+// la familia entera. El import map de next/font valida contra pesos discretos, así
+// que aquí no sirve la sintaxis de rango ("500 600").
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  display: "swap",
+  fallback: ["Georgia", "Times New Roman", "serif"],
+});
+
+// Cuerpo, navegación, botones y formularios. Poppins NO es variable en Google
+// Fonts, así que cada peso es un archivo aparte: cargamos únicamente los cuatro
+// que el markup usa hoy (400/500/600/700) y ninguno más — sin cursivas.
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-});
-
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
+  fallback: ["system-ui", "-apple-system", "Segoe UI", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -47,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${montserrat.variable} ${playfairDisplay.variable} h-full antialiased`}
+      className={`${poppins.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Navbar />

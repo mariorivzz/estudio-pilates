@@ -40,7 +40,7 @@ export default function Footer() {
               <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center">
                 <TbYoga className="text-white" size={19} />
               </div>
-              <span className="font-serif font-bold text-lg lowercase">
+              <span className="font-serif font-semibold text-lg lowercase">
                 calma <span className="text-primary-light">studio</span>
               </span>
             </div>
