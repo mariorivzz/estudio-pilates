@@ -15,6 +15,16 @@
 // Modelo configurable por env var: los catálogos de modelos cambian con
 // frecuencia, así que el nombre no se hardcodea — ver GROQ_MODEL en
 // .env.example.
+//
+// ⚠️ Groq RETIRA modelos cada pocos meses. Cuando lo hace, su API responde 404
+// `model_not_found`, `route.ts` lo traduce a 502 y el asistente deja de
+// contestar de un día para otro — con la clave perfectamente válida, que es lo
+// que despista. Le pasó a `llama-3.3-70b-versatile`, el valor por defecto
+// anterior. Para ver cuáles siguen vivos con tu clave:
+//   curl -s https://api.groq.com/openai/v1/models -H "Authorization: Bearer $GROQ_API_KEY"
+// descartando los whisper-* (voz a texto) y los *-guard-* (clasificadores de
+// seguridad: no conversan). El arreglo es cambiar GROQ_MODEL en Vercel y
+// redesplegar; no hace falta tocar este archivo.
 
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
@@ -22,7 +32,7 @@ export interface ChatMessage {
 }
 
 const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
-const DEFAULT_MODEL = 'llama-3.3-70b-versatile';
+const DEFAULT_MODEL = 'openai/gpt-oss-120b';
 
 export class GroqConfigError extends Error {}
 

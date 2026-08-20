@@ -53,17 +53,23 @@ solo como referencia por si en el futuro se retoma xAI de verdad.
   tocó `route.ts` ni `ChatWidget.tsx`.
 - Streaming vía SSE: `data: {...}` por chunk con `choices[0].delta.content`, termina en
   `data: [DONE]`.
-- Modelos de producción disponibles en el momento de escribir esto: `llama-3.3-70b-versatile`
-  y `llama-3.1-8b-instant` (Meta, recomendados para chat general), `openai/gpt-oss-120b` y
-  `openai/gpt-oss-20b` (modelos abiertos de OpenAI), además de `groq/compound` y
-  `groq/compound-mini` (sistemas agénticos con herramientas propias, no aplican aquí) y
-  modelos de voz (`whisper-large-v3*`).
-- **Elegido: `llama-3.3-70b-versatile`.** Es el modelo que Groq recomienda para chat/
-  instrucciones generales, con buena calidad en español y contexto de sobra (131k tokens)
-  para este caso de uso. El nombre del modelo **no está hardcodeado** — es `GROQ_MODEL` en
-  variables de entorno (por defecto `llama-3.3-70b-versatile` en
-  `src/lib/chatbot/groqClient.ts`), porque el catálogo de modelos también cambia con
-  cierta frecuencia en Groq.
+- Modelos de conversación disponibles a 20 de agosto de 2026, comprobados contra la API:
+  `openai/gpt-oss-120b` y `openai/gpt-oss-20b` (modelos abiertos de OpenAI),
+  `qwen/qwen3.6-27b`, `allam-2-7b`, además de `groq/compound` y `groq/compound-mini`
+  (sistemas agénticos con herramientas propias, no aplican aquí). Aparte quedan los de voz
+  (`whisper-large-v3*`) y los clasificadores (`*-guard-*`), que no conversan.
+  ⚠️ Los `llama-3.*` de Meta que se listaban aquí antes **ya no existen**: Groq los retiró.
+- **Elegido: `openai/gpt-oss-120b`.** Sustituye a `llama-3.3-70b-versatile`, que era el valor
+  por defecto original hasta que Groq lo retiró: a partir de ese momento su API respondía 404
+  `model_not_found`, `route.ts` lo traducía a 502 y el asistente contestaba siempre con el
+  mensaje de error, con la clave todavía válida. Se descartó la variante `20b` porque en un
+  proyecto hermano se inventaba condiciones y precios de los servicios; aquí el bot da
+  horarios y tarifas, así que prima la fiabilidad sobre la velocidad.
+  El nombre del modelo **no está hardcodeado** — es `GROQ_MODEL` en variables de entorno (por
+  defecto `openai/gpt-oss-120b` en `src/lib/chatbot/groqClient.ts`), así que la próxima
+  retirada se arregla cambiando la variable en Vercel y redesplegando, sin tocar código.
+  Para ver qué sigue vivo:
+  `curl -s https://api.groq.com/openai/v1/models -H "Authorization: Bearer $GROQ_API_KEY"`
 
 ## Decisiones de arquitectura y por qué
 
