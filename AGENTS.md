@@ -46,7 +46,11 @@ negocio.
 - NO glassmorphism / neumorfismo
 - Sombras: `shadowOpacity max 0.08`, `blur max 8px` (ver clases `.card`, `.fab-shadow` en `globals.css`)
 - Fondo nunca `#ffffff` puro — usar `var(--background)`
-- Alineación izquierda como base
+- Alineación izquierda como base — **nunca** `text-align: justify` (los ríos de espacio
+  dificultan la lectura a personas con dislexia o baja visión)
+- Reparto de líneas resuelto en `globals.css`, no componente a componente:
+  `text-wrap: balance` en h1–h6 y `text-wrap: pretty` heredado desde `body`. Si un titular
+  llegara a 6 líneas hay que acortar el texto — Chromium deja de equilibrar a partir de ahí
 - Iconos: **Tabler Icons** (`react-icons/tb`) exclusivamente — no Font Awesome genérico
 - Textos en español natural del sector de Pilates/Barre/bienestar (evitar tecnicismos vacíos)
 - Animaciones sutiles (fade/slide), nunca bounce ni efectos llamativos

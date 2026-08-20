@@ -58,6 +58,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-poppins), system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Ver el bloque "Reparto de palabras entre líneas" más abajo. */
+  text-wrap: pretty;
 }
 
 /* Titulares: Fraunces en todo h1/h2/h3, lleven o no la clase `font-serif` en el
@@ -67,6 +69,48 @@ h1,
 h2,
 h3 {
   font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+}
+
+/* ── Reparto de palabras entre líneas ─────────────── */
+/* Objetivo: que no quede una línea suelta muy corta al lado de líneas
+   largas, ni una palabra huérfana cerrando un párrafo. Se resuelve aquí,
+   en el CSS base, para todo el sitio; no hace falta repetirlo componente
+   a componente (Tailwind tiene además `text-balance` / `text-pretty` para
+   casos sueltos que necesiten lo contrario de lo que hereden).
+
+   NO usar `text-align: justify` en ninguna parte del sitio: los ríos de
+   espacio que genera dificultan la lectura a personas con dislexia o baja
+   visión. La alineación por defecto (izquierda) se queda como está. */
+
+/* Titulares: reparte las palabras para igualar el largo de las líneas.
+   Chromium solo lo aplica hasta 6 líneas (y desactiva el equilibrado por
+   encima), así que si algún titular llegara a ese largo hay que acortar el
+   texto, no forzar la propiedad. Hoy ninguno pasa de ~5 líneas, y solo el
+   h1 del Hero a 320 px de ancho. Incluye h4-h6 (etiquetas del Footer, de
+   CitasSection): en una sola línea `balance` no hace nada, y cubre
+   titulares que crezcan más adelante. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/* Texto corrido: `pretty` evita la palabra huérfana en la última línea.
+   Va declarado en `body` (arriba) porque `text-wrap` se hereda, y así cubre
+   también los bloques de texto que no son <p>: los <div> de LegalLayout, el
+   <span> del consentimiento de CitasSection, las burbujas del chat... Se
+   repite aquí de forma explícita para los elementos de texto largo, para
+   que la regla siga en pie si algún contenedor intermedio cambia el valor.
+   Los titulares de arriba lo sobrescriben con `balance`. */
+p,
+li,
+dd,
+blockquote,
+figcaption {
+  text-wrap: pretty;
 }
 
 html {
