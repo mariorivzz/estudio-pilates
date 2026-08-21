@@ -89,7 +89,7 @@ export default function CompromisoSection() {
           {puntos.map(({ icon: Icon, titulo, descripcion }, index) => (
             <ScrollReveal
               key={titulo}
-              className="bg-[#7CA2E0]/8 border border-[#7CA2E0]/25 rounded-xl p-5"
+              className="bg-[#6182c2]/12 border border-[#6182c2]/30 rounded-xl p-5"
               delay={((index + 1) * 100) as 100 | 200 | 300}
             >
               <Icon className="text-primary-light mb-2" size={20} />
