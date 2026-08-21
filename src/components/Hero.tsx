@@ -7,14 +7,8 @@ import { TbArrowRight, TbBrandInstagram, TbYoga } from 'react-icons/tb';
 // const HERO_IMAGE =
 //   'https://images.unsplash.com/photo-1747239685045-fcbcf98985db?q=90&w=2600&auto=format&fit=crop';
 
-// Foto a sangre de la mitad derecha. Es la misma imagen que abre el feed de
-// Instagram (`mock-1` en src/lib/instagram.ts), para que Hero y feed compartan
-// estética. Se pide a Unsplash recortada a 1920x2160 (ratio 0.889) porque esa es
-// la proporción real del panel: media pantalla de ancho por el alto del Hero
-// —0.88 a 1280x800, 0.95 a 1920x1080—. Al coincidir de origen, `object-cover`
-// apenas tiene que recortar, y los 1920 px de ancho cubren pantallas 2x.
-const HERO_PHOTO =
-  'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=90&w=1920&h=2160&fit=crop&auto=format';
+// Foto a sangre de la mitad derecha con imagen local de Barre
+const HERO_PHOTO = '/img/barre2.jpg';
 
 export default function Hero() {
   return (

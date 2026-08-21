@@ -168,42 +168,57 @@ const mock = (
   isVideo,
 });
 
+const mockLocal = (
+  id: string,
+  imagePath: string,
+  alt: string,
+  caption: string,
+  isVideo = false
+): FeedPost => ({
+  id,
+  permalink: siteConfig.instagramUrl,
+  src: imagePath,
+  srcLarge: imagePath,
+  alt,
+  caption,
+  isVideo,
+});
+
 const MOCK_POSTS: FeedPost[] = [
-  mock(
+  mockLocal(
     'mock-1',
-    'photo-1518611012118-696072aa579a',
-    'Grupo reducido haciendo Pilates sobre esterillas en una sala luminosa',
-    'Clases en grupos reducidos para cuidar tu técnica desde el primer día 🤍'
+    '/img/barre.jpg',
+    'Grupo de mujeres en clase de Barre realizando ejercicios en la barra de ballet',
+    'El primer centro de Barre de Salamanca: ballet, pilates y fitness en la barra 🤍'
   ),
-  mock(
+  mockLocal(
     'mock-2',
-    'photo-1552196563-55cd4e45efb3',
-    'Mujer sentada sobre una esterilla en un estudio de suelo de madera',
+    '/img/barre_img2.jpg',
+    'Grupo reducido haciendo Barre sobre esterillas en una sala luminosa',
+    'Clases en grupos reducidos para cuidar tu técnica desde el primer día'
+  ),
+  mockLocal(
+    'mock-3',
+    '/img/pilates3.jpg',
+    'Clase de Pilates en estudio profesional',
     'Respirar, colocarse, empezar. Así arranca cada sesión.'
   ),
-  mock(
-    'mock-3',
-    'photo-1599901860904-17e6ed7083a0',
-    'Postura de estiramiento en un estudio, fotografía en blanco y negro',
-    'Trabajo de movilidad y control. Poquito a poco se nota.',
-    true
-  ),
-  mock(
+  mockLocal(
     'mock-4',
-    'photo-1591258370814-01609b341790',
-    'Dos alumnas trabajando la espalda tumbadas boca abajo en clase',
+    '/img/pilates4.jpg',
+    'Ejercicios de espalda y postura en clase de Pilates',
     'Espalda fuerte, postura cuidada. Uno de nuestros básicos.'
   ),
-  mock(
+  mockLocal(
     'mock-5',
-    'photo-1544367567-0f2fcb009e0b',
-    'Silueta de una persona estirando al atardecer',
+    '/img/barre5.jpg',
+    'Clase de Barre con movimientos y técnica de ballet',
     'Encontrar tu calma también es entrenar.'
   ),
-  mock(
+  mockLocal(
     'mock-6',
-    'photo-1571019613454-1cb2f99b2d8b',
-    'Mujer haciendo ejercicios de abdomen sobre una esterilla',
+    '/img/barre2.jpg',
+    'Clase de Barre: técnica y movimiento en grupo',
     'Centro fuerte, todo lo demás va detrás. Nos vemos en el estudio.'
   ),
 ];
