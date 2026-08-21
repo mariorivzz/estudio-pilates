@@ -22,14 +22,14 @@ const servicios: Servicio[] = [
     titulo: 'Barre',
     descripcion: 'El primer centro de Barre de Salamanca: ballet, pilates y fitness en la barra.',
     items: ['Tonificación', 'Equilibrio', 'Ritmo y música'],
-    tint: 'text-highlight',
+    tint: 'text-primary-light',
   },
   {
     icon: TbApple,
     titulo: 'Nutrición',
     descripcion: 'Asesoramiento nutricional personalizado para cuidar tu bienestar integral.',
     items: ['Valoración inicial', 'Plan a medida', 'Seguimiento'],
-    tint: 'text-accent',
+    tint: 'text-primary-light',
   },
 ];
 

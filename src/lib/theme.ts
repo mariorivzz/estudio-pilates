@@ -30,7 +30,7 @@ export const theme = {
 
   // Insignias de "Próximamente" / confianza
   highlight: '#8fa4d1',       // Azul
-  highlightDark: '#2b3b64',   // Azul oscuro — fondo de sección (CompromisoSection)
+  highlightDark: '#7CA2E0',   // Azul oscuro — fondo de sección (CompromisoSection)
   highlightBg: '#e6ecf8',
 
   // Estructura
