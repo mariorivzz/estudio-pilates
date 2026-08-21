@@ -89,12 +89,21 @@ export default function CompromisoSection() {
           {puntos.map(({ icon: Icon, titulo, descripcion }, index) => (
             <ScrollReveal
               key={titulo}
-              className="bg-[#6182c2]/12 border border-[#6182c2]/30 rounded-xl p-5"
+              className="relative bg-white/7 border-2 border-[#6182c2]/40 rounded-xl p-5 overflow-hidden"
               delay={((index + 1) * 100) as 100 | 200 | 300}
             >
-              <Icon className="text-primary-light mb-2" size={20} />
-              <h3 className="text-white font-semibold text-sm mb-1.5">{titulo}</h3>
-              <p className="text-white/60 text-sm leading-relaxed">{descripcion}</p>
+              <div
+                className="absolute inset-0 opacity-[0.03]"
+                style={{
+                  backgroundImage: 'radial-gradient(circle, #6182c2 1px, transparent 1px)',
+                  backgroundSize: '20px 20px',
+                }}
+              />
+              <div className="relative z-10">
+                <Icon className="text-primary-light mb-2" size={20} />
+                <h3 className="text-white font-semibold text-sm mb-1.5">{titulo}</h3>
+                <p className="text-white/60 text-sm leading-relaxed">{descripcion}</p>
+              </div>
             </ScrollReveal>
           ))}
         </div>
